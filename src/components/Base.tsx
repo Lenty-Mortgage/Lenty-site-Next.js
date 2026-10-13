@@ -8,7 +8,7 @@ import { url, absUrl } from '../lib/url';
 import { personId, reviewer } from '../lib/entity';
 import { advisorLanguages, langName } from '../content/advisors';
 import { ModuleScript } from '../lib/assets';
-import Header, { VariantButtons } from './Header';
+import Header from './Header';
 import Footer from './Footer';
 import MobileBar from './MobileBar';
 import CookieBar from './CookieBar';
@@ -90,9 +90,6 @@ export default function Base({
       {bodyClass && <script dangerouslySetInnerHTML={{ __html: `document.body.className=${JSON.stringify(bodyClass)}` }} />}
       {ld.map((o, i) => <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(o) }} />)}
       <a className="skip" href="#main">Skip to content</a>
-      {chrome && (
-        <div className="vswitch tgl" role="group" aria-label="Site variant"><VariantButtons /></div>
-      )}
       {chrome && <Header onHero={onHero} page={pageName} slug={slug} situation={situation} />}
       <main id="main">
         {breadcrumbs.length > 0 && (

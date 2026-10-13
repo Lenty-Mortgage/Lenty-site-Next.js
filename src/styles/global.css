@@ -2,9 +2,9 @@
    Fonts: Prata + Inter are self-hosted via @fontsource (copied by scripts/build-client.mjs, declared in app/layout.tsx), not loaded from Google Fonts. */
 :root{
   --forest:#002C1F; --forest-2:#1E4034; --cream:#EEE2C9; --sand:#B79D84; --sage:#2E6A50;
-  --bg:#F4F2EA; --surface:#FFFDF8; --surface-2:#EFECE3; --ink:#002C1F; --muted:#636962; --line:#E3DFD2;
+  --bg:#F4F2EA; --surface:#FFFDF8; --surface-2:#EFECE3; --ink:#002C1F; --muted:#646A63; --line:#E3DFD2;
   --primary:#002C1F; --on-primary:#EEE2C9; --accent:#2E6A50; --accent-soft:#E4EDE6; --wa:#1D7A4A; --tbc-bg:#FBF0D6; --tbc-ink:#9C5A00;
-  --ok:#1D7A4A; --warn:#9C5A00;
+  --ok:#1D7A4A; --warn:#9C5A00; --on-wa:#fff;
   --hero-bg:#002C1F; --hero-ink:#EEE2C9; --hero-muted:rgba(238,226,201,.72);
   --aurora:repeating-linear-gradient(100deg,#1e4034 10%,#3f7a5e 15%,#b79d84 20%,#efe2c8 25%,#2e6a50 30%);
   --display:"Prata","Iowan Old Style","Palatino Linotype",Georgia,serif;
@@ -16,11 +16,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#071A13; --surface:#0E261D; --surface-2:#153226; --ink:#EEE2C9; --muted:#A9B0A6; --line:#22392E;
   --primary:#EEE2C9; --on-primary:#002C1F; --accent:#8CC4A6; --accent-soft:#163A2B; --wa:#3DBA7A; --tbc-bg:#3A2A10; --tbc-ink:#F0C27A;
-  --ok:#6FCB98; --warn:#F0C27A; --hero-bg:#0E3326; color-scheme:dark}}
+  --ok:#6FCB98; --warn:#F0C27A; --hero-bg:#0E3326; --on-wa:#071A13; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#071A13; --surface:#0E261D; --surface-2:#153226; --ink:#EEE2C9; --muted:#A9B0A6; --line:#22392E;
   --primary:#EEE2C9; --on-primary:#002C1F; --accent:#8CC4A6; --accent-soft:#163A2B; --wa:#3DBA7A; --tbc-bg:#3A2A10; --tbc-ink:#F0C27A;
-  --ok:#6FCB98; --warn:#F0C27A; --hero-bg:#0E3326; color-scheme:dark}
+  --ok:#6FCB98; --warn:#F0C27A; --hero-bg:#0E3326; --on-wa:#071A13; color-scheme:dark}
 
 /* aurora: the app's signature gradient, used only on dark panels */
 .aur{position:relative;overflow:hidden;isolation:isolate;background:var(--hero-bg);color:var(--hero-ink)}
@@ -41,7 +41,7 @@ img,svg{max-width:100%;height:auto}
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.15;overflow-wrap:anywhere}
 h1{font-size:clamp(2.1rem,5.2vw,3.6rem)}
 h2{font-size:clamp(1.6rem,3.4vw,2.4rem)}
-h3{font-size:1.25rem;font-family:var(--body);font-weight:600;line-height:1.3;letter-spacing:-.01em} /* small headings: Inter (Prata only for large ones) */
+h3,.h3{font-size:1.25rem;font-family:var(--body);font-weight:600;line-height:1.3;letter-spacing:-.01em} /* small headings: Inter (Prata only for large ones); .h3 = h3 look on a higher-level heading */
 h4{margin:0}
 p{margin:0;overflow-wrap:anywhere}
 .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gutter);width:100%}
@@ -50,7 +50,7 @@ p{margin:0;overflow-wrap:anywhere}
 .muted{color:var(--muted)}
 .small{font-size:.875rem}
 .num{font-variant-numeric:tabular-nums}
-.sit>*,.adv>*,.case>*,.step>*,.fact>*,.panel>*,.fee>*,.hero-card>*,.summary-box>*,.prose>*,.stack>*,.stack-lg>*,.contact-grid>*,.after>*,.calc>*,.faq-cols>*,.foot>*{min-width:0}
+.sit>*,.adv>*,.case>*,.step>*,.fact>*,.panel>*,.fee>*,.summary-box>*,.prose>*,.stack>*,.stack-lg>*,.contact-grid>*,.after>*,.calc>*,.faq-cols>*,.foot>*{min-width:0}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
 .tbc{display:inline-block;font-family:var(--mono);font-size:.72em;letter-spacing:.02em;background:var(--tbc-bg);color:var(--tbc-ink);border:1px dashed var(--tbc-ink);border-radius:6px;padding:.05em .45em;vertical-align:-.1em;white-space:normal;overflow-wrap:normal;word-break:normal;line-height:1.3;max-width:100%;overflow:hidden;vertical-align:-.15em}
@@ -106,7 +106,7 @@ header.site.on-hero .menu-btn{color:#EEE2C9;border-color:rgba(238,226,201,.4)}
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:var(--primary);color:var(--on-primary)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn-wa{background:var(--wa);color:#fff}
+.btn-wa{background:var(--wa);color:var(--on-wa)} /* dark theme: dark text on the bright green (white was 2.5:1) */
 .btn-sm{padding:10px 14px;font-size:.9rem}
 .btn-block{width:100%}
 .wa-ico{width:18px;height:18px;flex:none}
@@ -125,37 +125,25 @@ section.block{padding-block:56px;border-bottom:1px solid var(--line)}
 .stack{display:grid;gap:14px}
 .stack-lg{display:grid;gap:40px}
 
-/* A/B preview: .v-orig shows in Original, .v-test in Test and Test 1 (<html data-variant="test" | "test1">).
-   Test 1 = Test + the mobile carousels below. */
-.v-test{display:none}
-:root[data-variant^="test"] .v-orig{display:none}
-:root[data-variant^="test"] .v-test{display:revert}
-/* toggle switch (Theme, Variant) */
+/* toggle switch (Theme) */
 .tgl{display:inline-flex;gap:2px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:2px}
 .tgl button{font:600 .78rem var(--body);color:var(--muted);background:transparent;border:0;border-radius:999px;padding:5px 11px;cursor:pointer}
 .tgl button[aria-pressed="true"]{background:var(--primary);color:var(--on-primary)}
-/* temporary floating Original/Test switch: desktop only (on mobile it lives in Menu → Settings) */
-.vswitch{position:fixed;left:12px;bottom:12px;z-index:44;background:rgba(0,44,31,.88);border-color:transparent;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(0,44,31,.25)}
-.vswitch button{color:#EEE2C9}
-.vswitch button[aria-pressed="true"]{background:#EEE2C9;color:#002C1F}
-@media (max-width:960px){.vswitch{display:none}}
 
 /* Hero C (dark aurora first screen) */
-.hero-c{display:flex;align-items:center;position:relative;overflow:hidden;isolation:isolate;margin-top:calc(-1 * var(--hdr-h));padding-block:calc(var(--hdr-h) + 56px) 56px;min-height:min(820px,100svh);background:#071A13;color:#EEE2C9}
+.hero-c{display:flex;align-items:center;position:relative;overflow:hidden;isolation:isolate;margin-top:calc(-1 * var(--hdr-h));padding-block:calc(var(--hdr-h) + 56px) 56px;min-height:min(900px,100svh);background:#071A13;color:#EEE2C9}
 @media (min-width:800px){.hero-c{padding-block:calc(var(--hdr-h) + 72px) 72px}}
 /* aurora sized by the viewport, not the hero height: web-font reflow must not resize it (CLS) */
 .hero-c::before{content:"";position:absolute;top:-40vh;left:-40%;width:180%;height:max(260vh,1600px);z-index:-1;background-image:var(--aurora);background-size:300% 200%;filter:blur(48px);opacity:.5;animation:aur 24s linear infinite}
 .hero-c::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,26,19,.82) 0%,rgba(7,26,19,.55) 50%,rgba(7,26,19,.25) 100%)}
 @media (max-width:760px){.hero-c::after{background:linear-gradient(180deg,rgba(7,26,19,.55) 0%,rgba(7,26,19,.78) 45%,rgba(7,26,19,.6) 100%)}}
-.hero-c .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px;align-items:center}
-@media (max-width:900px){.hero-c .wrap{grid-template-columns:1fr;gap:32px}}
-.hc-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero-c .wrap{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+@media (max-width:900px){.hero-c .wrap{gap:32px}}
+.hc-copy{display:flex;flex-direction:column;gap:28px;min-width:0}
 .hc-eyebrow{font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8CC4A6}
-.hero-c h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,5.4vw,76px);line-height:1.04;letter-spacing:-.01em;color:#EEE2C9}
+.hero-c h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,7.2vw,84px);line-height:1.04;letter-spacing:-.01em;color:#EEE2C9} /* sized so the Prata headline stays on one line on desktop */
 .hero-c h1 em{font-style:normal;color:#8CC4A6}
-/* Test-variant H1 is CSS-generated so the HTML (what search engines read) carries only the Original headline */
-.hc-h1-test>span:first-child::before{content:"Make the "}.hc-h1-test>em::before{content:"impossible"}.hc-h1-test>span:last-child::before{content:" work."}
-.hc-lead{font-size:clamp(17px,1.5vw,21px);line-height:1.5;color:rgba(238,226,201,.8);max-width:720px}
+.hc-lead{font-size:clamp(17px,1.6vw,23px);line-height:1.5;color:rgba(238,226,201,.8);max-width:900px}
 .hc-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:6px}
 .hero-c .btn{min-height:58px;padding:0 28px;border-radius:14px;font-size:18px;font-weight:600}
 .hc-primary{background:#EEE2C9;color:#002C1F}
@@ -168,25 +156,6 @@ section.block{padding-block:56px;border-bottom:1px solid var(--line)}
 .hc-trust span::before{content:"";width:6px;height:6px;border-radius:50%;background:#8CC4A6;flex:none}
 .hero-c .tbc{background:rgba(238,226,201,.12);color:#F0C27A;border-color:#F0C27A}
 @media (max-width:600px){.hc-ctas{flex-direction:column}.hero-c .btn{width:100%;min-height:56px}}
-/* Test variant: one wide column (no example card), bigger headline — as in the prototype's Test */
-:root[data-variant^="test"] .hero-c{min-height:min(900px,100svh)}
-:root[data-variant^="test"] .hero-c .wrap{grid-template-columns:1fr}
-:root[data-variant^="test"] .hc-copy{gap:28px}
-:root[data-variant^="test"] .hero-c h1{font-size:clamp(44px,7.2vw,84px)} /* sized so the Prata headline stays on one line on desktop */
-:root[data-variant^="test"] .hc-lead{font-size:clamp(17px,1.6vw,23px);max-width:900px}
-/* hero card (example 2,000,000) */
-.hero-card{border-radius:var(--radius);padding:22px;display:grid;gap:12px;min-width:0;box-shadow:0 18px 40px rgba(0,44,31,.28);background:rgba(7,26,19,.55);border:1px solid rgba(238,226,201,.18);color:#EEE2C9;backdrop-filter:blur(6px)}
-.hero-card .eyebrow{color:var(--sand)}
-/* card titles are h2 for a valid heading order, but look like h3 */
-.hero-card h2,article.adv h2{margin:0;font-size:1.25rem;font-family:var(--body);font-weight:600;line-height:1.3;letter-spacing:-.01em}
-.hero-card h2{font-size:1.12rem}
-.hero-card .small{color:rgba(238,226,201,.72)}
-.hero-card .btn-ghost{color:#EEE2C9;border-color:rgba(238,226,201,.4);justify-self:start}
-.mini-row{display:flex;justify-content:space-between;gap:12px;padding-block:6px;border-bottom:1px dashed rgba(238,226,201,.25);font-size:.93rem}
-.mini-row:last-of-type{border-bottom:0}
-.mini-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:rgba(238,226,201,.12);border-radius:10px;padding:12px 14px}
-.mini-total b{font-family:var(--display);font-size:1.5rem;font-weight:400;white-space:nowrap}
-@media (max-width:420px){.mini-total b{font-size:1.3rem}}
 
 /* facts strip */
 .facts-strip{background:var(--surface);border-bottom:1px solid var(--line)}
@@ -219,30 +188,6 @@ table.cmp td:last-child{font-weight:500}
 /* steps */
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .steps.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
-/* Test 1 only — carousels (Your situation, Advisors, Cases on the home page), full screen width.
-   Mobile: one card at 82% width, next one peeks, swipe, dots below.
-   Desktop: fixed-width cards running edge to edge of the screen (first card lines up with the content),
-   ← → arrows around the dots; trackpad / shift+wheel also scrolls. */
-.car-dots{display:none}
-.adv.t1-dup{display:none}
-:root[data-variant="test1"] .adv.t1-dup{display:grid}
-:root[data-variant="test1"] .carousel{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(280px,25vw,340px);grid-template-columns:none !important;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;scrollbar-width:none;--bleed:max(var(--gutter),calc((100vw - var(--maxw)) / 2 + var(--gutter)));margin-inline:calc(-1 * var(--bleed)) !important;padding:2px var(--bleed) 6px !important;scroll-padding-inline:var(--bleed)}
-:root[data-variant="test1"] .carousel::-webkit-scrollbar{display:none}
-:root[data-variant="test1"] .carousel>*{scroll-snap-align:start}
-:root[data-variant="test1"] .car-dots{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:16px}
-:root[data-variant="test1"] .car-dots.off{display:none}
-:root[data-variant="test1"] .car-dots i{width:6px;height:6px;border-radius:999px;background:var(--line);transition:width .2s,background .2s}
-:root[data-variant="test1"] .car-dots i.on{width:18px;background:var(--accent)}
-.car-arr{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:600 1.05rem var(--body);cursor:pointer;transition:border-color .15s,opacity .15s}
-.car-arr:first-child{margin-right:10px}
-.car-arr:last-child{margin-left:10px}
-.car-arr:hover:not(:disabled){border-color:var(--accent)}
-.car-arr:disabled{opacity:.35;cursor:default}
-@media (max-width:760px){
-  :root[data-variant="test1"] .carousel{grid-auto-columns:82%;gap:12px}
-  :root[data-variant="test1"] .car-dots{margin-top:14px}
-  .car-arr{display:none}
-}
 @media (max-width:700px){.steps.n3{grid-template-columns:1fr}}
 @media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.steps{grid-template-columns:1fr}}
@@ -259,8 +204,9 @@ table.cmp td:last-child{font-weight:500}
 .chat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:grid;gap:10px}
 .bubble{max-width:88%;padding:10px 14px;border-radius:14px;font-size:.93rem}
 .bubble.them{background:var(--surface-2);border-top-left-radius:4px}
-.bubble.me{background:var(--wa);color:#fff;margin-left:auto;border-top-right-radius:4px}
-.bubble .t{display:block;font-size:.72rem;opacity:.9;margin-top:4px}
+.bubble.me{background:var(--wa);color:var(--on-wa);margin-left:auto;border-top-right-radius:4px}
+.bubble .t{display:block;font-size:.72rem;opacity:.7;margin-top:4px}
+.bubble.me .t{opacity:1}
 ol.timeline{list-style:none;margin:0;padding:0;display:grid;gap:16px}
 ol.timeline li{display:grid;grid-template-columns:96px 1fr;gap:14px}
 @media (max-width:420px){ol.timeline li{grid-template-columns:1fr;gap:4px}}
@@ -329,7 +275,7 @@ footer.site{padding-block:48px calc(40px + var(--mbar-h));font-size:.9rem;color:
 .foot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
 @media (max-width:900px){.foot{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.foot{grid-template-columns:1fr}}
-.foot h2{font-family:var(--body);font-weight:700;line-height:inherit;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:0 0 10px}
+.foot h2{font-family:var(--body);font-size:.8rem;font-weight:700;line-height:1.55;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:0 0 10px}
 .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .foot a{text-decoration:none}
 .foot a:hover{text-decoration:underline}
@@ -445,6 +391,7 @@ table.lines tr.sub td{font-weight:700;border-bottom:0;padding-top:12px}
 .progress{height:6px;background:var(--surface-2);border-radius:999px;overflow:hidden;margin-bottom:24px}
 .progress i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s ease}
 .qstep h1,.qstep h2{font-size:clamp(1.5rem,3.4vw,2rem);margin-bottom:8px}
+.qstep h2.h3{font-size:1.25rem;margin-bottom:0} /* advisor name on /thanks/: h2 for the outline, h3 look */
 .qstep .why{color:var(--muted);font-size:.92rem;margin-bottom:22px}
 .opts{display:grid;gap:10px}
 .opt{display:flex;align-items:center;gap:14px;text-align:left;width:100%;font:500 1rem var(--body);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;cursor:pointer}

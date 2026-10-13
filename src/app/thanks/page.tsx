@@ -20,7 +20,7 @@ export default function Page() {
           <h1>That&apos;s it for now<span id="thanksName"></span>. Your advisor takes it from here.</h1>
           <article className="adv" style={{ margin: '24px 0' }}>
             <div className="avatar" aria-hidden="true">{a.initial}</div>
-            <h2>{a.name}</h2>
+            <h2 className="h3">{a.name}</h2>
             <p className="small muted">{a.role}</p>
             <p className="small">will write to you on <span id="thanksChannel">WhatsApp</span> within {sla ?? <Tbc label="X" />} min (working hours {site.company.hours ?? <Tbc label="hours" />})</p>
           </article>

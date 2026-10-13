@@ -10,7 +10,7 @@ export default function SituationCards({ page, slug }: { page: string; slug: str
           <p className="eyebrow">Your situation</p>
           <h2 id="sit-h2">Start from where you are, not from the bank&apos;s checklist</h2>
         </div>
-        <div className="sit-grid carousel" data-carousel="">
+        <div className="sit-grid">
           {situations.map((s) => (
             <a key={s.slug} className="sit" href={url(`/situations/${s.slug}/`)}>
               <span className="q">{s.card.title}</span>
@@ -24,7 +24,6 @@ export default function SituationCards({ page, slug }: { page: string; slug: str
             <span className="go">Message an advisor →</span>
           </a>
         </div>
-        <div className="car-dots" aria-hidden="true"></div>
       </div>
     </section>
   );

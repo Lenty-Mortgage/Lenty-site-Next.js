@@ -1,4 +1,4 @@
-/* Site-wide behaviour: analytics delegation, cookie bar, dropdown hover. Progressive — the page works without it. */
+/* Site-wide behaviour: analytics delegation, cookie bar, dropdown hover, theme switch. Progressive — the page works without it. */
 (function () {
   window.dataLayer = window.dataLayer || [];
   var push = function (ev, data) {
@@ -79,59 +79,6 @@
     });
   });
   markTheme();
-
-  /* A/B preview switch (floating pill on desktop, mobile menu → Settings): Original / Test / Test 1 */
-  var vBtns = document.querySelectorAll('[data-variant-btn]');
-  var markVariant = function () {
-    var cur = document.documentElement.getAttribute('data-variant') || 'original';
-    vBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-variant-btn') === cur)); });
-  };
-  vBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var v = b.getAttribute('data-variant-btn');
-      if (v === 'test' || v === 'test1') document.documentElement.setAttribute('data-variant', v);
-      else document.documentElement.removeAttribute('data-variant');
-      try { localStorage.setItem('lenty-variant', v); } catch (e) {}
-      markVariant();
-    });
-  });
-  markVariant();
-
-  /* Test 1 carousels: one dot per card (active one follows the scroll); ← → arrows on desktop */
-  document.querySelectorAll('[data-carousel]').forEach(function (car) {
-    var nav = car.parentElement.querySelector('.car-dots');
-    if (!nav) return;
-    var items = car.children;
-    var arrow = function (dir, label) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'car-arr'; b.textContent = dir < 0 ? '←' : '→'; b.setAttribute('aria-label', label);
-      b.addEventListener('click', function () {
-        var w = items[0] ? items[0].getBoundingClientRect().width + parseFloat(getComputedStyle(car).columnGap || 0) : car.clientWidth;
-        car.scrollBy({ left: dir * w, behavior: 'smooth' });
-      });
-      return b;
-    };
-    var prev = arrow(-1, 'Previous'), next = arrow(1, 'Next');
-    nav.removeAttribute('aria-hidden');
-    nav.appendChild(prev);
-    var dots = [];
-    for (var i = 0; i < items.length; i++) { var d = document.createElement('i'); d.setAttribute('aria-hidden', 'true'); nav.appendChild(d); dots.push(d); }
-    nav.appendChild(next);
-    var mark = function () {
-      var max = car.scrollWidth - car.clientWidth;
-      nav.classList.toggle('off', max <= 2 && getComputedStyle(car).overflowX !== 'visible');
-      var w = items[0] ? items[0].getBoundingClientRect().width + parseFloat(getComputedStyle(car).columnGap || 0) : 1;
-      var idx = Math.round(car.scrollLeft / w);
-      if (car.scrollLeft >= max - 4) idx = items.length - 1;
-      dots.forEach(function (d, j) { d.classList.toggle('on', j === idx); });
-      prev.disabled = car.scrollLeft <= 2;
-      next.disabled = car.scrollLeft >= max - 2;
-    };
-    car.addEventListener('scroll', mark, { passive: true });
-    window.addEventListener('resize', mark);
-    document.querySelectorAll('[data-variant-btn]').forEach(function (b) { b.addEventListener('click', function () { setTimeout(mark, 0); }); });
-    mark();
-  });
 
   /* keep --hdr-h in sync with the real header height (Hero C tucks under it) */
   var hdr = document.querySelector('header.site');
