@@ -10,7 +10,7 @@ import { advisorFor } from '../../../content/advisors';
 import { site } from '../../../config/site';
 import { url } from '../../../lib/url';
 import { rich, faqPageLd } from '../../../lib/rich';
-import { reviewer, reviewedPageLd } from '../../../lib/entity';
+import { reviewer, reviewedPageLd, serviceLd } from '../../../lib/entity';
 import { pageMetadata } from '../../../lib/seo';
 
 type Params = { params: Promise<{ slug: string }> };
@@ -36,7 +36,7 @@ export default async function Page({ params }: Params) {
   const faqLd = faqPageLd(s.questions.map((q) => ({ q: q.q, a: q.a })));
   return (
     <Base path={`/situations/${s.slug}/`} pageName={page} situation={s.slug}
-      breadcrumbs={[{ label: 'My situation', href: '/#situations' }, { label: s.nav, href: `/situations/${s.slug}/` }]} jsonLd={[faqLd, reviewedPageLd(`/situations/${s.slug}/`, s.metaTitle)]}>
+      breadcrumbs={[{ label: 'My situation', href: '/#situations' }, { label: s.nav, href: `/situations/${s.slug}/` }]} jsonLd={[faqLd, reviewedPageLd(`/situations/${s.slug}/`, s.metaTitle), serviceLd(`/situations/${s.slug}/`, s.metaTitle.replace(/\s*\|\s*Lenty$/, ''), s.nav)]}>
       <section className="page-hero" style={{ paddingTop: 12 }}>
         <div className="wrap">
           <p className="eyebrow">{s.eyebrow}</p>

@@ -50,6 +50,12 @@
 8. **Рантайм Next.js видаляється після збірки** (`scripts/postbuild.mjs`): `<script src="/_next/…">`, RSC-payload, `*.txt`, дублікати `/404/` і `/_not-found/`. Якщо колись знадобиться `'use client'`-компонент, збірка зупиниться з поясненням; тоді `KEEP_NEXT_RUNTIME=1` залишає стандартний вихід Next.js.
 9. **`PUBLIC_BASE` за замовчуванням = `/`** (в Astro — `/lenty-site/v2`). Для підпапки задайте змінну явно.
 10. **Сторінки поза списком із завдання** — `/glossary/` і `/insights/complex-cases-2026/` — є в main lenty-site, тому теж перенесені (разом із їхньою розміткою schema.org).
+12. **Розмітка schema.org доповнена після порту** (13.10.2026, тому `npm run compare` показує «JSON-LD differs» на всіх сторінках; head/SEO і DOM лишились однаковими):
+    - головна: `WebSite` (назва сайту у видачі Google);
+    - організація: адреса розбита на вулицю / місто / країну, `contactPoint` з мовами радників;
+    - сторінки ситуацій: `Service` (послуга, провайдер, аудиторія) і `isPartOf` → `WebSite`;
+    - `/advisors/`: `Person` лише для радників без «to confirm» (Razie повернеться в розмітку після підтвердження);
+    - стаття insights: `description`, `image`, `isPartOf`.
 11. **Dev-режим** (`npm run dev`) — це звичайний Next.js dev-сервер із рантаймом React; без нього лише продакшн-збірка (`npm run build`).
 
 ## Таблиця по сторінках (згенеровано `scripts/compare.mjs`)

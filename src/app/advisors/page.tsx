@@ -2,8 +2,8 @@ import Base from '../../components/Base';
 import Advisors from '../../components/Advisors';
 import WhatsAppLink from '../../components/WhatsAppLink';
 import Tbc from '../../components/Tbc';
-import { advisors, advisorLanguages, langName } from '../../content/advisors';
-import { personLd } from '../../lib/entity';
+import { advisorLanguages, langName } from '../../content/advisors';
+import { personLd, confirmedAdvisors } from '../../lib/entity';
 import { pageMetadata } from '../../lib/seo';
 
 export const metadata = pageMetadata({
@@ -13,7 +13,7 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  const peopleLd = advisors.filter((a) => a.name).map((a) => ({ '@context': 'https://schema.org', ...personLd(a) }));
+  const peopleLd = confirmedAdvisors().map((a) => ({ '@context': 'https://schema.org', ...personLd(a) }));
   const page = 'Advisors', slug = 'advisors';
   return (
     <Base path="/advisors/" pageName={page} breadcrumbs={[{ label: 'Advisors', href: '/advisors/' }]} jsonLd={peopleLd}>

@@ -13,6 +13,7 @@ import AgentsLine from '../components/AgentsLine';
 import { homeFaq } from '../content/faq';
 import { site, showGoogleReviews } from '../config/site';
 import { faqPageLd } from '../lib/rich';
+import { websiteLd } from '../lib/entity';
 import { pageMetadata } from '../lib/seo';
 
 export const metadata = pageMetadata({
@@ -25,7 +26,7 @@ export default function Home() {
   const page = 'Home', slug = 'home';
   const faqLd = faqPageLd(homeFaq.flatMap((g) => g.items));
   return (
-    <Base path="/" pageName={page} onHero jsonLd={[faqLd]}>
+    <Base path="/" pageName={page} onHero jsonLd={[websiteLd(), faqLd]}>
       <HeroC page={page} slug={slug} />
       <FactsStrip />
       <SituationCards page={page} slug={slug} />
