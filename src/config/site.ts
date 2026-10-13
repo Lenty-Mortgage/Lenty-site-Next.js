@@ -24,6 +24,8 @@ export const site = {
     facebook: 'https://www.facebook.com/share/18F9KNPi8N/',
     linkedin: 'https://www.linkedin.com/company/109534117/',
   },
+  // Date the advisor last reviewed the situation pages, FAQ and glossary (shown as "Reviewed … by", WebPage.lastReviewed)
+  contentReviewed: { iso: '2026-10-13', label: '13 October 2026' },
   banks: {
     count: 20 as number | null,
     phrase: 'access to', // «Access to 20+ banks»

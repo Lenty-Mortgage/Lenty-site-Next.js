@@ -4,6 +4,7 @@
  * join "this page" → "reviewed by this person" → "who works for this licensed company".
  */
 import { absUrl } from './url';
+import { site as siteConfig } from '../config/site';
 import { advisors, type Advisor } from '../content/advisors';
 
 export const orgId = (site?: URL) => absUrl('/', site) + '#organization';
@@ -53,6 +54,7 @@ export function reviewedPageLd(path: string, name: string, site?: URL): object {
     isPartOf: { '@id': websiteId(site) },
     publisher: { '@id': orgId(site) },
     reviewedBy: personLd(reviewer, site),
+    lastReviewed: siteConfig.contentReviewed.iso,
   };
 }
 

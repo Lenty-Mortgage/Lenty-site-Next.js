@@ -46,7 +46,7 @@ export default async function Page({ params }: Params) {
             {s.facts.map((f) => <div key={f.v + f.k} className="fact"><span className="v num">{f.v}</span><Html className="k" html={rich(f.k)} /></div>)}
           </div>
           <div className="hero-ctas"><a className="btn btn-primary" href={url(`/check/?s=${s.slug}`)}>Check my chances · 2 min</a></div>
-          <p className="updated">{updated && `Updated ${updated} · `}Reviewed by <a href={url(`/advisors/#${reviewer.slug}`)}>{reviewer.name}</a>, {reviewer.role}, Lenty ({site.company.license})</p>
+          <p className="updated">{updated && `Updated ${updated} · `}Reviewed {site.contentReviewed.label} by <a href={url(`/advisors/#${reviewer.slug}`)}>{reviewer.name}</a>, {reviewer.role}, Lenty ({site.company.license})</p>
         </div>
       </section>
 

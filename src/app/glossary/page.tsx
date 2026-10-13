@@ -58,7 +58,7 @@ export default function Page() {
           <p className="eyebrow">Glossary</p>
           <h1>UAE mortgage terms, in plain English</h1>
           <p className="lead">{terms.length} terms you meet between the first call and the keys, with the figures UAE banks use.</p>
-          <p className="updated">Reviewed by <a href={url(`/advisors/#${reviewer.slug}`)}>{reviewer.name}</a>, {reviewer.role}, Lenty ({site.company.license})</p>
+          <p className="updated">Reviewed {site.contentReviewed.label} by <a href={url(`/advisors/#${reviewer.slug}`)}>{reviewer.name}</a>, {reviewer.role}, Lenty ({site.company.license})</p>
           <nav className="faq-toc" aria-label="Terms" style={{ marginTop: 20 }}>{terms.map((t) => <a key={t.id} className="chip" href={`#${t.id}`}>{t.term}</a>)}</nav>
         </div>
       </section>

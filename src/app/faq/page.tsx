@@ -26,7 +26,7 @@ export default function Page() {
           <p className="eyebrow">FAQ</p>
           <h1>What clients ask before the first call</h1>
           <p className="lead">{faqCount} questions in six groups. {pendingCount > 0 && <>{pendingCount} answers are drafts waiting for an advisor&apos;s check <Tbc label="to confirm" /></>}</p>
-          <p className="updated">Reviewed by <a href={url(`/advisors/#${reviewer.slug}`)}>{reviewer.name}</a>, {reviewer.role}, Lenty ({site.company.license}) · Terms explained in the <a href={url('/glossary/')}>mortgage glossary</a></p>
+          <p className="updated">Reviewed {site.contentReviewed.label} by <a href={url(`/advisors/#${reviewer.slug}`)}>{reviewer.name}</a>, {reviewer.role}, Lenty ({site.company.license}) · Terms explained in the <a href={url('/glossary/')}>mortgage glossary</a></p>
           <nav className="faq-toc" aria-label="FAQ groups" style={{ marginTop: 20 }}>{faq.map((g) => <a key={g.id} className="chip" href={`#faq-${g.id}`}>{g.title}</a>)}</nav>
         </div>
       </section>
