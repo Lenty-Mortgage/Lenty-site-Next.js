@@ -37,6 +37,27 @@ npm run typecheck
 
 Одноразово в **Settings → Pages**: *Deploy from a branch*, гілка `gh-pages`, папка `/ (root)`.
 
+## Запуск на lenty.com
+
+GitHub Pages не вміє 301-редиректи, тому продакшн — на **Cloudflare Pages** (рекомендовано) або **Vercel**. Обидва варіанти вже налаштовані в репозиторії:
+
+- **Cloudflare Pages:** build command `npm run build`, output `out`, змінні `PUBLIC_SITE_URL=https://lenty.com`, `PUBLIC_BASE=/`, `PUBLIC_NOINDEX=false`, `PUBLIC_LEAD_ENDPOINT=…`. Редиректи — `public/_redirects` (копіюється в `out/`).
+- **Vercel:** `vercel.json` (статичний `out/`, `trailingSlash`, ті самі редиректи) + ті самі змінні в Settings → Environment Variables.
+- `www` → `lenty.com` і інші домени (lentymortgage.com) — 301 у налаштуваннях домену на хостингу або в DNS.
+
+Редиректи старих адрес: `/non-resident-mortgage` → `/situations/non-resident/`, `/mortgages` → `/#situations`. `/`, `/about`, `/partners`, `/faq` існують і в новому сайті.
+
+Аналітика й пошукові консолі — у `src/config/site.ts` → `analytics`:
+
+| Поле | Звідки взяти | Без нього |
+|---|---|---|
+| `ga4Id` | GA4 → Admin → Data streams → Web → Measurement ID (`G-…`) | GA4 не вставляється |
+| `clarityId` | Clarity → Settings → Overview → Project ID | Clarity не вставляється |
+| `gscVerification` | Search Console → властивість «URL-префікс» → Інші способи → HTML-тег → значення `content` | не потрібне, якщо властивість «Домен» підтверджено DNS-записом |
+| `bingVerification` | Bing Webmaster Tools → тег `msvalidate.01` | не потрібне при імпорті з Search Console |
+
+GA4 і Clarity вмикаються лише після «Accept» у cookie-банері.
+
 ## Змінні середовища (під час збірки)
 
 Ті самі, що в Astro-версії.

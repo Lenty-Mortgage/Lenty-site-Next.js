@@ -7,7 +7,13 @@ import { SITE_URL, LEAD_ENDPOINT } from '../lib/env';
 import { url } from '../lib/url';
 import { fonts } from '../lib/assets';
 
-export const metadata: Metadata = { metadataBase: new URL(SITE_URL) };
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  verification: {
+    google: site.analytics.gscVerification ?? undefined,
+    other: site.analytics.bingVerification ? { 'msvalidate.01': site.analytics.bingVerification } : undefined,
+  },
+};
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#002C1F' };
 
 /* Self-hosted fonts (@fontsource, latin subset only). Prata 400 + Inter 400/600 are used above the fold and preloaded (CLS). */

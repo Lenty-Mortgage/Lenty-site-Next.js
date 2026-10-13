@@ -57,6 +57,9 @@ export const site = {
   analytics: {
     ga4Id: null as string | null, // e.g. 'G-XXXXXXX' — null = no tag inserted
     clarityId: null as string | null, // Microsoft Clarity project id — null = no tag inserted
+    // Google Search Console, URL-prefix property: the content of <meta name="google-site-verification">. Not needed with a DNS (Domain) property.
+    gscVerification: null as string | null,
+    bingVerification: null as string | null, // Bing Webmaster Tools <meta name="msvalidate.01">; not needed when importing from Search Console
   },
   calc: {
     ratesDate: null as string | null, // null = no "as of" date shown; set e.g. '13 October 2026' after the advisors re-check rates
