@@ -60,7 +60,7 @@ export default function Footer({ minimal = false }: { minimal?: boolean }) {
           </p>
           <p>Lenty is a licensed mortgage advisory, not a bank. Approval, rates and terms are decided by the lending bank. Figures on this site are estimates.</p>
           <div className="foot-theme"><span>Theme</span><ThemeToggle /></div>
-          <p className="sep"><span>Languages: {languagesLabel()}</span>{!minimal && <><a href={c.instagram} target="_blank" rel="noopener">Instagram</a><a href={c.facebook} target="_blank" rel="noopener">Facebook</a></>}</p>
+          <p className="sep"><span>Languages: {languagesLabel()}</span>{!minimal && <><a href={c.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={c.instagram} target="_blank" rel="noopener">Instagram</a><a href={c.facebook} target="_blank" rel="noopener">Facebook</a></>}</p>
         </div>
       </div>
     </footer>

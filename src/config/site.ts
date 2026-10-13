@@ -22,6 +22,7 @@ export const site = {
     founded: 2025,
     instagram: 'https://www.instagram.com/lenty.mortgage',
     facebook: 'https://www.facebook.com/share/18F9KNPi8N/',
+    linkedin: 'https://www.linkedin.com/company/109534117/',
   },
   banks: {
     count: 20 as number | null,

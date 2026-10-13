@@ -67,7 +67,7 @@ export default function Base({
       } : undefined,
       foundingDate: String(site.company.founded),
       identifier: { '@type': 'PropertyValue', propertyID: 'DED Trade License', value: site.company.license.replace(/^\D+/, '') },
-      sameAs: [site.company.instagram, site.company.facebook, site.google.url].filter(Boolean),
+      sameAs: [site.company.linkedin, site.company.instagram, site.company.facebook, site.google.url].filter(Boolean),
       founder: { '@id': personId(reviewer) },
       knowsAbout: ['Mortgages in the UAE', 'Non-resident mortgages in Dubai', 'Self-employed mortgages', 'Off-plan handover mortgages', 'Equity release', 'Mortgage buy-out'],
       description: 'Licensed mortgage advisory in Dubai for complex cases: non-residents, business owners, declined applicants.',
