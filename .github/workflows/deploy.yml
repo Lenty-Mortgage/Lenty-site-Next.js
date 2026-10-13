@@ -1,0 +1,48 @@
+# Builds the static site and publishes it to GitHub Pages (branch gh-pages):
+#   https://<owner>.github.io/<repo>/
+# - push to main → build + deploy
+# - pull request → build only (checks that the site still builds)
+# - "Run workflow" button → build + deploy the chosen branch
+# Pages must be set to "Deploy from a branch: gh-pages / (root)" in Settings → Pages.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+      PUBLIC_BASE: /${{ github.event.repository.name }}
+      # Test site: keep pages noindex (set PUBLIC_NOINDEX=false for production)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Publish out/ to gh-pages
+        if: github.event_name != 'pull_request'
+        working-directory: out
+        run: |
+          touch .nojekyll
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy ${GITHUB_SHA::7} from ${GITHUB_REF_NAME}"
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages

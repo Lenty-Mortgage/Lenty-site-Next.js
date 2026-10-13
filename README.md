@@ -26,6 +26,17 @@ npm run typecheck
 
 `npm run build` = `scripts/build-client.mjs` (браузерні скрипти й шрифти) → `next build` (HTML усіх сторінок) → `scripts/postbuild.mjs` (прибирає рантайм Next.js).
 
+## Публікація (GitHub Pages)
+
+Тестова версія: **https://lenty-mortgage.github.io/Lenty-site-Next.js/** (noindex).
+
+`.github/workflows/deploy.yml` збирає сайт з `PUBLIC_BASE=/<назва репозиторію>` і публікує `out/` у гілку `gh-pages`:
+- пуш у `main` → збірка й деплой;
+- pull request → лише збірка (перевірка, що сайт збирається);
+- Actions → «Deploy to GitHub Pages» → **Run workflow** → деплой вибраної гілки.
+
+Одноразово в **Settings → Pages**: *Deploy from a branch*, гілка `gh-pages`, папка `/ (root)`.
+
 ## Змінні середовища (під час збірки)
 
 Ті самі, що в Astro-версії.
