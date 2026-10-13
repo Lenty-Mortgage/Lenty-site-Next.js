@@ -69,3 +69,34 @@ export function serviceLd(path: string, name: string, audience: string, site?: U
     url: absUrl(path, site),
   };
 }
+
+/** AboutPage / ContactPage: tells search engines which page describes the organisation and how to reach it. */
+export function orgPageLd(type: 'AboutPage' | 'ContactPage', path: string, name: string, site?: URL): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': type,
+    '@id': absUrl(path, site) + '#webpage',
+    url: absUrl(path, site),
+    name,
+    isPartOf: { '@id': websiteId(site) },
+    mainEntity: { '@id': orgId(site) },
+  };
+}
+
+/** A free in-browser calculator. No rating or review: nothing here would be honest to claim yet. */
+export function calculatorLd(path: string, name: string, description: string, site?: URL): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    '@id': absUrl(path, site) + '#app',
+    name,
+    description,
+    url: absUrl(path, site),
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Any (web browser)',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'AED' },
+    provider: { '@id': orgId(site) },
+    isPartOf: { '@id': websiteId(site) },
+  };
+}

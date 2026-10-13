@@ -56,6 +56,9 @@
     - сторінки ситуацій: `Service` (послуга, провайдер, аудиторія) і `isPartOf` → `WebSite`;
     - `/advisors/`: `Person` лише для радників без «to confirm» (Razie повернеться в розмітку після підтвердження);
     - стаття insights: `description`, `image`, `isPartOf`.
+    - калькулятори: `WebApplication` (безкоштовний, `FinanceApplication`, без рейтингів і відгуків);
+    - `/about/` і `/contact/`: `AboutPage` / `ContactPage` з `mainEntity` → організація;
+    - ліцензія в `identifier` організації — `PropertyValue` (DED Trade License, 1565247), а не рядок.
 11. **Dev-режим** (`npm run dev`) — це звичайний Next.js dev-сервер із рантаймом React; без нього лише продакшн-збірка (`npm run build`).
 
 ## Таблиця по сторінках (згенеровано `scripts/compare.mjs`)

@@ -4,6 +4,7 @@ import WhatsAppLink from '../../components/WhatsAppLink';
 import { site } from '../../config/site';
 import { url } from '../../lib/url';
 import { pageMetadata } from '../../lib/seo';
+import { orgPageLd } from '../../lib/entity';
 
 export const metadata = pageMetadata({
   title: 'About us: a licensed mortgage advisory in Dubai | Lenty',
@@ -15,7 +16,7 @@ export default function Page() {
   const page = 'About', slug = 'about';
   const c = site.company;
   return (
-    <Base path="/about/" pageName={page} breadcrumbs={[{ label: 'About', href: '/about/' }]}>
+    <Base path="/about/" pageName={page} breadcrumbs={[{ label: 'About', href: '/about/' }]} jsonLd={[orgPageLd('AboutPage', '/about/', 'About Lenty')]}>
       <section className="page-hero" style={{ paddingTop: 12 }}>
         <div className="wrap"><p className="eyebrow">About</p><h1>A mortgage advisory, not a bank, not a platform</h1>
           <p className="lead">Lenty is a licensed mortgage consultant in Dubai. We work for the client, with {site.banks.count ? `${site.banks.count}+` : <Tbc label="N" />} banks, on the cases that don&apos;t fit a checklist.</p></div>

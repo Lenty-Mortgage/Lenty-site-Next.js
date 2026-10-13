@@ -4,6 +4,7 @@ import WhatsAppLink from '../../components/WhatsAppLink';
 import { site } from '../../config/site';
 import { url } from '../../lib/url';
 import { pageMetadata } from '../../lib/seo';
+import { orgPageLd } from '../../lib/entity';
 
 export const metadata = pageMetadata({
   title: 'Contact a mortgage advisor in Dubai | Lenty',
@@ -15,7 +16,7 @@ export default function Page() {
   const page = 'Contact', slug = 'contact';
   const c = site.company;
   return (
-    <Base path="/contact/" pageName={page} breadcrumbs={[{ label: 'Contact', href: '/contact/' }]}>
+    <Base path="/contact/" pageName={page} breadcrumbs={[{ label: 'Contact', href: '/contact/' }]} jsonLd={[orgPageLd('ContactPage', '/contact/', 'Contact Lenty')]}>
       <section className="page-hero" style={{ paddingTop: 12 }}><div className="wrap"><p className="eyebrow">Contact</p><h1>Talk to a person</h1></div></section>
       <section className="block">
         <div className="wrap stack-lg">
