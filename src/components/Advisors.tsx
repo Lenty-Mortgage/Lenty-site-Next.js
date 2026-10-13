@@ -9,8 +9,6 @@ interface Props { page: string; slug: string; all?: boolean; list?: Advisor[]; h
 
 export default function Advisors({ page, slug, all = false, list, heading = true, showSituations = false }: Props) {
   const items = list ?? (all ? advisors : advisors.slice(0, 4));
-  /* Test 1 only: repeat the home-page advisors as placeholders (.t1-dup, hidden in Original/Test) so the carousel fills the screen */
-  const cards = [...items.map((a) => ({ a, dup: false })), ...(all ? [] : Array.from({ length: 3 }, () => items.map((a) => ({ a, dup: true }))).flat())];
   return (
     <section className="block" id="advisors" aria-labelledby="adv-h2">
       <div className="wrap">
@@ -22,9 +20,9 @@ export default function Advisors({ page, slug, all = false, list, heading = true
             <p className="lead">You speak with the same advisor from the first message to the keys.</p>
           </div>
         )}
-        <div className={all ? 'adv-grid' : 'adv-grid carousel'} data-carousel={!all ? '' : undefined}>
-          {cards.map(({ a, dup }, i) => (
-            <article key={i} className={dup ? 'adv t1-dup' : 'adv'} id={dup ? undefined : a.slug}>
+        <div className="adv-grid">
+          {items.map((a) => (
+            <article key={a.slug} className="adv" id={a.slug}>
               <div className="avatar" aria-hidden="true">{a.initial}</div>
               <h3>{a.name ?? <Tbc label={a.tbcLabel ?? 'Advisor'} />}</h3>
               <p className="small muted">{a.role}</p>
@@ -40,7 +38,6 @@ export default function Advisors({ page, slug, all = false, list, heading = true
             </article>
           ))}
         </div>
-        {!all && <div className="car-dots" aria-hidden="true"></div>}
         {!all && <p className="sec-foot"><a className="arrow" href={url('/advisors/')}>All advisors →</a></p>}
       </div>
     </section>

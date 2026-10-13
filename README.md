@@ -1,6 +1,6 @@
 # lenty.com v2 — Next.js
 
-Сайт Lenty на **Next.js 16 (App Router, TypeScript, статичний експорт)**. Перенесено з Astro-версії без змін у текстах, даних, дизайні, адресах, SEO й аналітиці.
+Сайт Lenty на **Next.js 16 (App Router, TypeScript, статичний експорт)**. Перенесено з Astro-версії без змін у текстах, даних, дизайні, адресах, SEO й аналітиці. Пізніші зміни (доступність, лише варіант Test) описано в [docs/COMPARISON.md](docs/COMPARISON.md#зміни-після-перенесення-свідомі-відмінності-від-astro).
 
 ## Звідки перенесено
 
@@ -55,11 +55,11 @@ npm run typecheck
 
 - **Усі сторінки — серверні компоненти React**, що рендеряться в HTML під час збірки. У браузер React не потрапляє: `scripts/postbuild.mjs` видаляє з `out/` скрипти й RSC-payload Next.js (без нього кожна сторінка тягнула б ≈ 0.5 MB JS, якому нічого гідратувати).
 - **JavaScript лише там, де він потрібен** — це ті самі ванільні скрипти, що в Astro, зібрані esbuild:
-  - `src/client/site.js` — усі сторінки: події аналітики, cookie-банер, меню «My situation», тема Auto/Light/Dark, перемикач Original/Test/Test 1, каруселі, висота хедера;
+  - `src/client/site.js` — усі сторінки: події аналітики, cookie-банер, меню «My situation», тема Auto/Light/Dark, висота хедера;
   - `src/client/calculator.js` — калькулятори (`/calculators/*`), логіка в `src/lib/calc.js`;
   - `src/client/check-form.js` — форма `/check/` і `/lp/check/`;
   - inline на своїх сторінках: `thanks.js`, `cases-filter.js`, `doc-tabs.js`, `partner-form.js`.
-- У `<head>` (`src/app/layout.tsx`) — два inline-скрипти, як і в Astro: тема/варіант до першого рендеру та `dataLayer` + GA4/Clarity, що вмикаються тільки після «Accept».
+- У `<head>` (`src/app/layout.tsx`) — два inline-скрипти, як і в Astro: тема до першого рендеру та `dataLayer` + GA4/Clarity, що вмикаються тільки після «Accept».
 
 ## Де що лежить
 
@@ -81,7 +81,7 @@ Sitemap не містить `/lp/`, `/thanks/`, `/check/`, `/404` і `/calculato
 
 `whatsapp_click`, `call_click`, `cookie_consent`, `calc_result` (throttle 1 с), `salesforce_form_start`, `form_step_N`, `salesforce_form_submit_success`, `form_submit` (лише на `/thanks/`, раз за сесію), `form_submit_error`, `partner_form_submit`, `partner_app_click` (`cta`: `register` / `login` / `register-form`).
 
-З `ga4Id` кожен `dataLayer.push({ event, … })` пересилається в GA4 як подія з тими самими параметрами плюс `site_variant` (`original` / `test` / `test1`, також user property і тег Clarity). У GA4 зареєструйте потрібні параметри як custom dimensions і позначте `form_submit` та `partner_form_submit` як key events.
+З `ga4Id` кожен `dataLayer.push({ event, … })` пересилається в GA4 як подія з тими самими параметрами. У GA4 зареєструйте потрібні параметри як custom dimensions і позначте `form_submit` та `partner_form_submit` як key events.
 
 ## Перевірити відповідність Astro-версії
 

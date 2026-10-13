@@ -15,10 +15,9 @@ export default function Cases({ list = cases, heading = true, link = true }: { l
             <p className="small muted">Anonymised examples. Details changed, outcomes real. <Tbc label="client consent or full anonymisation" /></p>
           </div>
         )}
-        <div className="case-grid carousel" data-carousel="">
+        <div className="case-grid">
           {list.map((c) => <CaseCard key={c.slug} c={c} />)}
         </div>
-        <div className="car-dots" aria-hidden="true"></div>
         {link && <p className="sec-foot"><a className="arrow" href={url('/cases/')}>All cases →</a></p>}
       </div>
     </section>

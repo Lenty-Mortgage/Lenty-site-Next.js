@@ -51,10 +51,6 @@ export default function Header({ onHero = false, page, slug, situation }: Props)
                 <span>Theme</span>
                 <ThemeToggle />
               </div>
-              <div className="mn-set">
-                <span>Variant</span>
-                <span className="tgl" role="group" aria-label="Site variant"><VariantButtons /></span>
-              </div>
             </nav>
           </details>
         </div>
@@ -66,9 +62,4 @@ export default function Header({ onHero = false, page, slug, situation }: Props)
 /** Auto / Light / Dark — wired up by client/site.js. */
 export function ThemeToggle() {
   return <span className="tgl" role="group" aria-label="Theme"><button type="button" data-theme-btn="auto">Auto</button><button type="button" data-theme-btn="light">Light</button><button type="button" data-theme-btn="dark">Dark</button></span>;
-}
-
-/** Original / Test / Test 1 — wired up by client/site.js. */
-export function VariantButtons() {
-  return <><button type="button" data-variant-btn="original">Original</button><button type="button" data-variant-btn="test">Test</button><button type="button" data-variant-btn="test1">Test 1</button></>;
 }

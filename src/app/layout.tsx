@@ -19,12 +19,9 @@ const fontCss = [
 ].join('');
 const preloadFonts = [fonts.prata400, fonts.inter400, fonts.inter600].map((f) => url(f + '.woff2'));
 
-/* A/B preview: ?v=test / ?v=original or the Original/Test switch; theme: Auto / Light / Dark switch. Both remembered in localStorage, set before paint. */
+/* Theme: Auto / Light / Dark switch, remembered in localStorage, set before paint. */
 const prePaint = `(function () {
       try { var t = localStorage.getItem('lenty-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
-      var v = null;
-      try { v = new URLSearchParams(location.search).get('v'); if (v) localStorage.setItem('lenty-variant', v); else v = localStorage.getItem('lenty-variant'); } catch (e) {}
-      if (v === 'test' || v === 'test1') document.documentElement.setAttribute('data-variant', v);
     })();`;
 
 /* dataLayer + consent-gated GA4 / Clarity. Values are baked in at build time and scoped in an IIFE, like Astro's define:vars. */
@@ -37,13 +34,11 @@ const leadEndpoint = ${JSON.stringify(LEAD_ENDPOINT)};
     window.LENTY.analytics = function () {
       if (window.LENTY.analyticsOn) return;
       window.LENTY.analyticsOn = true;
-      var variant = document.documentElement.getAttribute('data-variant') || 'original';
       var load = function (src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); };
       if (ga) {
         window.gtag = function () { dataLayer.push(arguments); };
         gtag('js', new Date());
-        gtag('set', 'user_properties', { site_variant: variant });
-        gtag('config', ga, { anonymize_ip: true, site_variant: variant });
+        gtag('config', ga, { anonymize_ip: true });
         load('https://www.googletagmanager.com/gtag/js?id=' + ga);
         /* gtag.js ignores plain { event: … } objects, so forward ours to GA4 as events. */
         var push = dataLayer.push;
@@ -52,7 +47,6 @@ const leadEndpoint = ${JSON.stringify(LEAD_ENDPOINT)};
             var o = arguments[i];
             if (o && typeof o.event === 'string' && !('length' in o)) {
               var p = {}; for (var k in o) if (k !== 'event') p[k] = o[k];
-              p.site_variant = variant;
               gtag('event', o.event, p);
             }
           }
@@ -61,7 +55,6 @@ const leadEndpoint = ${JSON.stringify(LEAD_ENDPOINT)};
       }
       if (clarity) {
         (function (c, l, a, r, i) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; load('https://www.clarity.ms/tag/' + i); })(window, document, 'clarity', 'script', clarity);
-        window.clarity('set', 'site_variant', variant);
       }
     };
     try { if (localStorage.getItem('lenty-cookies') === 'all') window.LENTY.analytics(); } catch (e) {}
