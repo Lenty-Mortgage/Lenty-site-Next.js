@@ -12,11 +12,11 @@ export default function Footer({ minimal = false }: { minimal?: boolean }) {
         {!minimal && (
           <div className="foot">
             <div>
-              <h4>Situations</h4>
+              <h2>Situations</h2>
               <ul>{situations.map((s) => <li key={s.slug}><a href={url(`/situations/${s.slug}/`)}>{s.nav}</a></li>)}</ul>
             </div>
             <div>
-              <h4>Tools</h4>
+              <h2>Tools</h2>
               <ul>
                 <li><a href={url('/calculators/monthly-payment/')}>Monthly payment</a></li>
                 <li><a href={url('/calculators/affordability/')}>How much can I borrow</a></li>
@@ -25,7 +25,7 @@ export default function Footer({ minimal = false }: { minimal?: boolean }) {
               </ul>
             </div>
             <div>
-              <h4>Company</h4>
+              <h2>Company</h2>
               <ul>
                 <li><a href={url('/about/')}>About</a></li>
                 <li><a href={url('/advisors/')}>Advisors</a></li>
@@ -38,7 +38,7 @@ export default function Footer({ minimal = false }: { minimal?: boolean }) {
               </ul>
             </div>
             <div>
-              <h4>Legal</h4>
+              <h2>Legal</h2>
               <ul>
                 <li><a href={url('/privacy/')}>Privacy</a></li>
                 <li><a href={url('/terms/')}>Terms</a></li>
