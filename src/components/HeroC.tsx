@@ -26,7 +26,7 @@ export default function HeroC({ page, slug }: { page: string; slug: string }) {
         </div>
         <aside className="hero-card v-orig" aria-label="Example: cash needed on a AED 2,000,000 apartment">
           <p className="eyebrow">Example · AED 2,000,000 apartment</p>
-          <h3>What most buyers don&apos;t hear until it&apos;s late</h3>
+          <h2>What most buyers don&apos;t hear until it&apos;s late</h2>
           <div className="mini-row"><span>Down payment (20%)</span><span className="num">400,000</span></div>
           <div className="mini-row"><span>DLD transfer fee (4%)</span><span className="num">80,580</span></div>
           <div className="mini-row"><span>Agent commission (2% + VAT)</span><span className="num">42,000</span></div>
