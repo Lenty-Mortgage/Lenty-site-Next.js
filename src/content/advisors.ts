@@ -16,15 +16,15 @@ export type Advisor = {
 const allAdvisors: Advisor[] = [
   {
     slug: 'nazar',
-    name: 'Nazar',
+    name: 'Nazar Verbytskyy',
     initial: 'N',
-    role: 'Founder & Senior Mortgage Advisor',
-    languages: ['EN', 'AR', 'FR', 'UK', 'RU', 'PL'],
+    role: 'Founder & CEO',
+    languages: ['EN', 'UK', 'RU', 'PL'],
     languagesTbc: false,
     specialisation: 'Complex cases, non-residents, business owners.',
     situations: ['non-resident', 'business-owner', 'declined', 'off-plan-handover', 'non-standard-income', 'portfolio'], // + Razie's situations while she is hidden
     whatsappDigits: null,
-    bio: null,
+    bio: 'Nazar Verbytskyy is the founder and CEO of Lenty, a licensed mortgage consultancy in Dubai (DED Trade License 1565247). He set up Lenty for the files a bank\'s checklist doesn\'t fit: non-residents, business owners and applicants who have already been declined. He advises in English, Ukrainian, Russian and Polish.',
   },
   {
     slug: 'razie',

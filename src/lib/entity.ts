@@ -36,6 +36,7 @@ export function personLd(a: Advisor, site?: URL): object {
     '@id': personId(a, site),
     name: a.name ?? undefined,
     jobTitle: a.role,
+    description: a.bio ?? undefined,
     worksFor: { '@id': orgId(site) },
     knowsLanguage: a.languagesTbc ? undefined : a.languages.map((l) => l.toLowerCase()),
     url: personId(a, site),

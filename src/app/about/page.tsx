@@ -4,7 +4,7 @@ import WhatsAppLink from '../../components/WhatsAppLink';
 import { site } from '../../config/site';
 import { url } from '../../lib/url';
 import { pageMetadata } from '../../lib/seo';
-import { orgPageLd } from '../../lib/entity';
+import { orgPageLd, reviewer as founder } from '../../lib/entity';
 
 export const metadata = pageMetadata({
   title: 'About us: a licensed mortgage advisory in Dubai | Lenty',
@@ -25,7 +25,7 @@ export default function Page() {
         <div className="wrap stack-lg">
           <div className="grid-2">
             <div className="panel stack"><p className="eyebrow">Licence</p><p><b>{c.legalName}</b></p><p>{c.license}, issued {c.licenseIssued} {c.licenseRenewal && `· valid until ${c.licenseRenewal}`}</p><p>{c.address ?? <Tbc label="address" />}</p><p className="small muted">TRN {c.trn}</p></div>
-            <div className="panel stack"><p className="eyebrow">Founder</p><div className="avatar" aria-hidden="true">N</div><p><b>Nazar</b> — Founder &amp; General Manager</p></div>
+            <div className="panel stack"><p className="eyebrow">Founder</p><div className="avatar" aria-hidden="true">{founder.initial}</div><p><b>{founder.name}</b> — {founder.role}</p>{founder.bio && <p className="muted">{founder.bio}</p>}</div>
           </div>
           <div>
             <div className="sec-head"><h2>Four principles</h2></div>
