@@ -1,0 +1,6 @@
+# Cloudflare Pages / Netlify: 301s from the old lenty.com URLs (they return 404 today).
+# www → lenty.com and other domains (lentymortgage.com) are set on the host / DNS, not here.
+/non-resident-mortgage    /situations/non-resident/   301
+/non-resident-mortgage/   /situations/non-resident/   301
+/mortgages                /#situations                301
+/mortgages/               /#situations                301
