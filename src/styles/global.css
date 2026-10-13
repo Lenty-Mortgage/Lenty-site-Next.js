@@ -312,6 +312,7 @@ footer.site{padding-block:48px calc(40px + var(--mbar-h));font-size:.9rem;color:
 @media (max-width:800px){.facts-grid{grid-template-columns:1fr 1fr}}
 .facts-grid.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:800px){.facts-grid.n3{grid-template-columns:1fr 1fr}}
+.facts-grid.n2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:4px;align-content:start}
 .fact .v{font-family:var(--display);font-size:1.4rem;line-height:1.15}
 .fact .k{font-size:.82rem;color:var(--muted)}

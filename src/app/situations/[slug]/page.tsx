@@ -10,7 +10,7 @@ import { advisorFor } from '../../../content/advisors';
 import { site } from '../../../config/site';
 import { url } from '../../../lib/url';
 import { rich, faqPageLd } from '../../../lib/rich';
-import { reviewer, reviewedPageLd } from '../../../lib/entity';
+import { reviewer, reviewedPageLd, serviceLd } from '../../../lib/entity';
 import { pageMetadata } from '../../../lib/seo';
 
 type Params = { params: Promise<{ slug: string }> };
@@ -36,17 +36,17 @@ export default async function Page({ params }: Params) {
   const faqLd = faqPageLd(s.questions.map((q) => ({ q: q.q, a: q.a })));
   return (
     <Base path={`/situations/${s.slug}/`} pageName={page} situation={s.slug}
-      breadcrumbs={[{ label: 'My situation', href: '/#situations' }, { label: s.nav, href: `/situations/${s.slug}/` }]} jsonLd={[faqLd, reviewedPageLd(`/situations/${s.slug}/`, s.metaTitle)]}>
+      breadcrumbs={[{ label: 'My situation', href: '/#situations' }, { label: s.nav, href: `/situations/${s.slug}/` }]} jsonLd={[faqLd, reviewedPageLd(`/situations/${s.slug}/`, s.metaTitle), serviceLd(`/situations/${s.slug}/`, s.metaTitle.replace(/\s*\|\s*Lenty$/, ''), s.nav)]}>
       <section className="page-hero" style={{ paddingTop: 12 }}>
         <div className="wrap">
           <p className="eyebrow">{s.eyebrow}</p>
           <h1>{s.h1}</h1>
           <p className="lead">{s.lead}</p>
-          <div className={s.facts.length === 3 ? 'facts-grid n3' : 'facts-grid'}>
+          <div className={s.facts.length < 4 ? `facts-grid n${s.facts.length}` : 'facts-grid'}>
             {s.facts.map((f) => <div key={f.v + f.k} className="fact"><span className="v num">{f.v}</span><Html className="k" html={rich(f.k)} /></div>)}
           </div>
           <div className="hero-ctas"><a className="btn btn-primary" href={url(`/check/?s=${s.slug}`)}>Check my chances · 2 min</a></div>
-          <p className="updated">Updated {updated ?? <Tbc label="date" />} · Reviewed by <a href={url(`/advisors/#${reviewer.slug}`)}>{reviewer.name}</a>, {reviewer.role}, Lenty ({site.company.license})</p>
+          <p className="updated">{updated && `Updated ${updated} · `}Reviewed {site.contentReviewed.label} by <a href={url(`/advisors/#${reviewer.slug}`)}>{reviewer.name}</a>, {reviewer.role}, Lenty ({site.company.license})</p>
         </div>
       </section>
 

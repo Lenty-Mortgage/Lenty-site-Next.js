@@ -1,5 +1,4 @@
 import Base from '../../components/Base';
-import Tbc from '../../components/Tbc';
 import CaseCard from '../../components/CaseCard';
 import { cases } from '../../content/cases';
 import { url } from '../../lib/url';
@@ -26,7 +25,6 @@ export default function Page() {
             <button type="button" className="chip" data-filter="" aria-current="true">All</button>
             {chips.map((c) => <button key={c} type="button" className="chip" data-filter={c} aria-current="false">{c}</button>)}
           </div>
-          <p className="small muted"><Tbc label="more cases to come, with client consent" /></p>
         </div>
       </section>
       <section className="block">
@@ -34,7 +32,7 @@ export default function Page() {
           <div className="case-grid" id="caseGrid">
             {cases.map((c) => <CaseCard key={c.slug} c={c} withSituation />)}
           </div>
-          <p className="small muted" id="caseEmpty" hidden style={{ marginTop: 16 }}>No published case for this situation yet. <Tbc label="to add" /></p>
+          <p className="small muted" id="caseEmpty" hidden style={{ marginTop: 16 }}>No published case for this situation yet.</p>
         </div>
       </section>
       <InlineModule name="cases-filter" />

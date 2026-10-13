@@ -28,10 +28,10 @@ export default function Advisors({ page, slug, all = false, list, heading = true
               <p className="small muted">{a.role}</p>
               <div className="langs" aria-label="Languages">{a.languages.map((l) => <span key={l}>{l}</span>)}{a.languagesTbc && <span className="tbc">+ languages</span>}</div>
               <p className="small">{a.specialisation ?? <Tbc label="specialisation to confirm" />}</p>
+              {showSituations && a.bio && <p className="small muted">{a.bio}</p>}
               {showSituations && (
                 <p className="small muted">Situations: {a.situations.map((s, j) => <Fragment key={s}><a href={url(`/situations/${s}/`)}>{situations.find((x) => x.slug === s)?.nav}</a>{j < a.situations.length - 1 ? ', ' : ''}</Fragment>)}</p>
               )}
-              {showSituations && <p className="small muted">Cases closed: <Tbc label="to confirm" /></p>}
               <div className="acts">
                 <WhatsAppLink page={page} slug={slug} className="btn btn-ghost btn-sm" />
               </div>

@@ -10,7 +10,7 @@ export const site = {
     legalName: 'LENTY MORTGAGE CONSULTANT L.L.C',
     license: 'DED Trade License 1565247',
     licenseIssued: '29 October 2025',
-    licenseRenewal: null as string | null, // [TO CONFIRM] renew by 28.10.2026
+    licenseRenewal: '28 October 2027' as string | null, // licence valid until
     trn: '105222729300001',
     address: 'Tameem House, Office 2803, Barsha Heights, Dubai, UAE' as string | null,
     phone: '+971 54 244 9656' as string | null,
@@ -22,7 +22,10 @@ export const site = {
     founded: 2025,
     instagram: 'https://www.instagram.com/lenty.mortgage',
     facebook: 'https://www.facebook.com/share/18F9KNPi8N/',
+    linkedin: 'https://www.linkedin.com/company/109534117/',
   },
+  // Date the advisor last reviewed the situation pages, FAQ and glossary (shown as "Reviewed … by", WebPage.lastReviewed)
+  contentReviewed: { iso: '2026-10-13', label: '13 October 2026' },
   banks: {
     count: 20 as number | null,
     phrase: 'access to', // «Access to 20+ banks»
@@ -33,7 +36,7 @@ export const site = {
     preApprovalResident: '24–48 hours' as string | null,
     preApprovalNonResident: '24–48 hours' as string | null, // [TO CONFIRM: same for non-residents?]
     bankMatching: '24–48 h' as string | null,
-    complexCases: null as string | null, // [TO CONFIRM: 3–5 working days]
+    complexCases: null as string | null, // null = not shown (not confirmed)
   },
   fees: {
     resident: 'Free',
@@ -57,9 +60,12 @@ export const site = {
   analytics: {
     ga4Id: null as string | null, // e.g. 'G-XXXXXXX' — null = no tag inserted
     clarityId: null as string | null, // Microsoft Clarity project id — null = no tag inserted
+    // Google Search Console, URL-prefix property: the content of <meta name="google-site-verification">. Not needed with a DNS (Domain) property.
+    gscVerification: null as string | null,
+    bingVerification: null as string | null, // Bing Webmaster Tools <meta name="msvalidate.01">; not needed when importing from Search Console
   },
   calc: {
-    ratesDate: null as string | null, // [TO CONFIRM + date]
+    ratesDate: null as string | null, // null = no "as of" date shown; set e.g. '13 October 2026' after the advisors re-check rates
     rateIllustrative: 4.25,
     vat: 0.05,
     stressRate: 7.5,

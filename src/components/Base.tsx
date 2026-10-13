@@ -6,6 +6,7 @@ import { Fragment, type ReactNode } from 'react';
 import { site } from '../config/site';
 import { url, absUrl } from '../lib/url';
 import { personId, reviewer } from '../lib/entity';
+import { advisorLanguages, langName } from '../content/advisors';
 import { ModuleScript } from '../lib/assets';
 import Header from './Header';
 import Footer from './Footer';
@@ -37,6 +38,8 @@ export default function Base({
   const ogImage = absUrl('/og.png');
   // Map pin from the Google Business Profile URL (…!3d<lat>!4d<lng>)
   const pin = site.google.url?.match(/!3d(-?[\d.]+)!4d(-?[\d.]+)/);
+  // Street part only: city and country have their own PostalAddress fields
+  const street = site.company.address?.replace(/,\s*Dubai(,\s*(UAE|United Arab Emirates))?\s*$/i, '');
 
   const ld: object[] = [
     {
@@ -49,7 +52,7 @@ export default function Base({
       url: absUrl('/'),
       telephone: site.company.phone ?? undefined,
       email: site.company.email ?? undefined,
-      address: site.company.address ? { '@type': 'PostalAddress', streetAddress: site.company.address, addressLocality: 'Dubai', addressCountry: 'AE' } : { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
+      address: { '@type': 'PostalAddress', streetAddress: street || undefined, addressLocality: 'Dubai', addressCountry: 'AE' },
       areaServed: { '@type': 'Country', name: 'United Arab Emirates' },
       ...(pin ? { geo: { '@type': 'GeoCoordinates', latitude: Number(pin[1]), longitude: Number(pin[2]) } } : {}),
       hasMap: site.google.url ?? undefined,
@@ -57,9 +60,14 @@ export default function Base({
       logo: absUrl('/logo.png'),
       image: ogImage,
       knowsLanguage: site.languages.live.map((l) => l.toLowerCase()),
+      contactPoint: site.company.phone ? {
+        '@type': 'ContactPoint', contactType: 'customer service', telephone: site.company.phone,
+        email: site.company.email ?? undefined, areaServed: 'AE',
+        availableLanguage: advisorLanguages().map(langName), // languages advisors speak on the call, not website languages
+      } : undefined,
       foundingDate: String(site.company.founded),
-      identifier: site.company.license,
-      sameAs: [site.company.instagram, site.company.facebook, site.google.url].filter(Boolean),
+      identifier: { '@type': 'PropertyValue', propertyID: 'DED Trade License', value: site.company.license.replace(/^\D+/, '') },
+      sameAs: [site.company.linkedin, site.company.instagram, site.company.facebook, site.google.url].filter(Boolean),
       founder: { '@id': personId(reviewer) },
       knowsAbout: ['Mortgages in the UAE', 'Non-resident mortgages in Dubai', 'Self-employed mortgages', 'Off-plan handover mortgages', 'Equity release', 'Mortgage buy-out'],
       description: 'Licensed mortgage advisory in Dubai for complex cases: non-residents, business owners, declined applicants.',

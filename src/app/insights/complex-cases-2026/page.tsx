@@ -2,16 +2,17 @@ import Base from '../../../components/Base';
 import WhatsAppLink from '../../../components/WhatsAppLink';
 import { site } from '../../../config/site';
 import { url, absUrl } from '../../../lib/url';
-import { reviewer, personLd, orgId } from '../../../lib/entity';
+import { reviewer, personLd, orgId, websiteId } from '../../../lib/entity';
 import { pageMetadata } from '../../../lib/seo';
 
 const path = '/insights/complex-cases-2026/';
 const title = 'Complex UAE mortgage cases in 2026: what 43 files show';
 const published = '2026-10-13';
+const description = 'Anonymised data from 43 Lenty cases: who needs a complex UAE mortgage, what they care about, how they find a broker and which files get approved.';
 
 export const metadata = pageMetadata({
   title: `${title} | Lenty`,
-  description: 'Anonymised data from 43 Lenty cases: who needs a complex UAE mortgage, what they care about, how they find a broker and which files get approved.',
+  description,
   path,
 });
 
@@ -50,9 +51,9 @@ export default function Page() {
   const ld = [
     {
       '@context': 'https://schema.org', '@type': 'Article', '@id': absUrl(path) + '#article',
-      headline: title, datePublished: published, dateModified: published,
+      headline: title, description, image: absUrl('/og.png'), datePublished: published, dateModified: published,
       author: personLd(reviewer), publisher: { '@id': orgId() },
-      mainEntityOfPage: absUrl(path), about: 'Mortgages for complex cases in the UAE',
+      mainEntityOfPage: absUrl(path), isPartOf: { '@id': websiteId() }, about: 'Mortgages for complex cases in the UAE',
     },
   ];
   return (

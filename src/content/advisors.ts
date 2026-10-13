@@ -10,20 +10,21 @@ export type Advisor = {
   whatsappDigits: string | null; // null → use company number
   bio?: string | null;
   tbcLabel?: string;
+  hidden?: boolean; // kept for later, not shown anywhere (site or schema)
 };
 
-export const advisors: Advisor[] = [
+const allAdvisors: Advisor[] = [
   {
     slug: 'nazar',
-    name: 'Nazar',
+    name: 'Nazar Verbytskyy',
     initial: 'N',
-    role: 'Founder & Senior Mortgage Advisor',
-    languages: ['EN', 'AR', 'FR', 'UK', 'RU', 'PL'],
+    role: 'Founder & CEO',
+    languages: ['EN', 'UK', 'RU', 'PL'],
     languagesTbc: false,
     specialisation: 'Complex cases, non-residents, business owners.',
-    situations: ['non-resident', 'business-owner', 'declined', 'off-plan-handover'],
+    situations: ['non-resident', 'business-owner', 'declined', 'off-plan-handover', 'non-standard-income', 'portfolio'], // + Razie's situations while she is hidden
     whatsappDigits: null,
-    bio: null, // [TO CONFIRM: 3 sentences]
+    bio: 'Nazar Verbytskyy is the founder and CEO of Lenty, a licensed mortgage consultancy in Dubai (DED Trade License 1565247), and has 30 years of experience in business. He set up Lenty for the files a bank\'s checklist doesn\'t fit: non-residents, business owners and applicants who have already been declined. He advises in English, Ukrainian, Russian and Polish.',
   },
   {
     slug: 'razie',
@@ -36,8 +37,11 @@ export const advisors: Advisor[] = [
     situations: ['non-standard-income', 'portfolio'],
     whatsappDigits: null,
     tbcLabel: 'name spelling, photo, languages · to confirm',
+    hidden: true, // until name spelling, photo and languages are confirmed
   },
 ];
+
+export const advisors: Advisor[] = allAdvisors.filter((a) => !a.hidden);
 
 export const advisorFor = (situationSlug: string): Advisor =>
   advisors.find((a) => a.situations.includes(situationSlug)) ?? advisors[0];
