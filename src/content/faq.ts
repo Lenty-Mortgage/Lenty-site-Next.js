@@ -92,7 +92,7 @@ export const faq: FaqGroup[] = [
       },
       {
         q: 'Do I need to be in Dubai to apply?',
-        a: 'For pre-approval, no. Most of the process runs remotely. Signing at the transfer can usually be done through a power of attorney. [[tbc:confirm]]',
+        a: 'For pre-approval, no. Most of the process runs remotely.',
       },
       {
         q: 'What documents do I need, and can I start before finding a property?',

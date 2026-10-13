@@ -34,7 +34,6 @@ export default function Advisors({ page, slug, all = false, list, heading = true
               {showSituations && (
                 <p className="small muted">Situations: {a.situations.map((s, j) => <Fragment key={s}><a href={url(`/situations/${s}/`)}>{situations.find((x) => x.slug === s)?.nav}</a>{j < a.situations.length - 1 ? ', ' : ''}</Fragment>)}</p>
               )}
-              {showSituations && <p className="small muted">Cases closed: <Tbc label="to confirm" /></p>}
               <div className="acts">
                 <WhatsAppLink page={page} slug={slug} className="btn btn-ghost btn-sm" />
               </div>

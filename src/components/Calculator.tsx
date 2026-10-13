@@ -4,7 +4,6 @@ import { site, calcParams } from '../config/site';
 import { cashToClose, fmt } from '../lib/calc.js';
 import { ModuleScript } from '../lib/assets';
 import { esc } from '../lib/rich';
-import Tbc from './Tbc';
 import WhatsAppLink from './WhatsAppLink';
 
 export type Tab = 'cash-to-close' | 'monthly-payment' | 'affordability';
@@ -80,7 +79,6 @@ export default function Calculator({ tab, page, slug }: Props) {
                 <div className="field"><label htmlFor="rate">Interest rate (%)</label><input id="rate" name="rate" type="number" step="0.05" min="1" max="12" defaultValue={P.rate} /><span className="hint">Illustrative. Your advisor confirms live rates.</span></div>
                 <div className="field"><label htmlFor="term">Term (years)</label><input id="term" name="term" type="number" min={P.minTerm} max={P.maxTerm} defaultValue={P.maxTerm} /></div>
               </div>
-              <p className="small muted">Fixed period: <Tbc label="wave 2" /></p>
             </div>
           )}
 
@@ -147,9 +145,9 @@ export default function Calculator({ tab, page, slug }: Props) {
             </>
           )}
           <div className="note">
-            <span>Illustrative rate {P.rate}% as of {ratesDate ?? <Tbc label="date" />}. Your advisor confirms live rates.</span>
+            <span>Illustrative rate {P.rate}%{ratesDate && ` as of ${ratesDate}`}. Your advisor confirms live rates.</span>
             <div className="callout"><b>Valuation gap.</b> If the bank values the property below the price, the bank lends on the lower figure and you pay the difference in cash. We order a valuation check before you sign where possible.</div>
-            <span>Fees are typical Dubai figures. Your advisor confirms the exact numbers for your bank. <Tbc label="rules reviewed with banks" /></span>
+            <span>Fees are typical Dubai figures. Your advisor confirms the exact numbers for your bank.</span>
           </div>
           <div className="res-acts">
             <a className="btn btn-primary" href={url('/check/')} id="calcCheck">{tab === 'cash-to-close' ? 'Discuss my case' : 'Check my chances'}</a>

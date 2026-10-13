@@ -1,7 +1,6 @@
 import Base from '../../components/Base';
 import Advisors from '../../components/Advisors';
 import WhatsAppLink from '../../components/WhatsAppLink';
-import Tbc from '../../components/Tbc';
 import { advisorLanguages, langName } from '../../content/advisors';
 import { personLd, confirmedAdvisors } from '../../lib/entity';
 import { pageMetadata } from '../../lib/seo';
@@ -25,8 +24,7 @@ export default function Page() {
           <div className="chips" style={{ marginTop: 20 }} aria-label="Languages our advisors speak">
             {advisorLanguages().map((l) => <span key={l} className="chip">{langName(l)}</span>)}
           </div>
-          <p className="small muted">More advisors, with photos and languages, are being added. <Tbc label="to confirm" /></p>
-        </div>
+                  </div>
       </section>
       <Advisors page={page} slug={slug} all heading={false} showSituations />
       <section className="block">

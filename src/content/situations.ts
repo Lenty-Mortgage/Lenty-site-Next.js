@@ -19,7 +19,7 @@ export type Situation = {
   documents?: { title: string; items: string[] }[];
   timeline?: string;
   cases: string[]; // case slugs from cases.ts
-  extraCases?: string[]; // one-line [TO CONFIRM] cases without a page
+  extraCases?: string[]; // one-line cases without a page (only with client consent)
   questions: { q: string; a: string | null }[];
   related: { label: string; href: string }[];
   calcHref: string;
@@ -40,7 +40,7 @@ export const situations: Situation[] = [
     lead: "You don't need UAE residency for a Dubai mortgage. You need the bank whose rules fit your country, your currency and your income. That's the part we handle.",
     facts: [
       { v: '50–60%', k: 'typical financing' },
-      { v: '≈ AED 25k', k: 'usual minimum net income per month [[tbc:to confirm]]' },
+      { v: '≈ AED 25k', k: 'usual minimum net income per month' },
       { v: '25 yrs', k: 'maximum term' },
       { v: '≈ 57%', k: 'of the price in cash on a 2M apartment' },
     ],
@@ -58,10 +58,10 @@ export const situations: Situation[] = [
       { title: 'Salaried', items: ['Passport (all pages)', '6 months of payslips and a salary certificate', '6 months of personal bank statements', 'Proof of address', 'Credit report from your country (some banks)'] },
       { title: 'Business owner', items: ['Passport', 'Certificate of incorporation, shareholder register, articles', '6–12 months of company and personal statements', 'Audited accounts, usually 2 years', 'Proof of address'] },
     ],
-    timeline: `Plan for ${data(site.sla.preApprovalNonResident, 'sla.preApprovalNonResident')} to pre-approval and 2–3 weeks from valuation to transfer. Most of the process is remote. Signing at the transfer can usually be done through a power of attorney [[tbc:to confirm]].`,
+    timeline: `Plan for ${data(site.sla.preApprovalNonResident, 'sla.preApprovalNonResident')} to pre-approval and 2–3 weeks from valuation to transfer. Most of the process is remote.`,
     cases: ['non-resident-business-owner-approved'],
     questions: [
-      { q: 'Do I have to travel to Dubai?', a: 'Not for the pre-approval. For the transfer you can usually sign through a power of attorney. [[tbc:confirm]]' },
+      { q: 'Do I have to travel to Dubai?', a: 'Not for the pre-approval: it runs remotely. For the transfer at the trustee office, your advisor confirms what your case needs.' },
       { q: 'Is there a fee for non-residents?', a: `Yes. Non-resident files take more work, so we charge a fee agreed in writing before we start: ${NR_FEE}.` },
       { q: 'Which nationalities are restricted?', a: "It depends on the bank. A few nationalities are excluded by some banks and accepted by others. Tell us yours and we'll check." },
       { q: 'Will the bank accept my foreign credit history?', a: "Some banks ask for a credit report from your country; a clean UAE record isn't required because you don't have one yet." },
@@ -85,9 +85,9 @@ export const situations: Situation[] = [
     lead: "Banks don't take your word for company income. They take statements, audits and time in business — and each bank weighs them differently.",
     facts: [
       { v: '80%', k: 'financing for residents (first home ≤ 5M)' },
-      { v: '2 yrs', k: 'of company history at most banks [[tbc:to confirm]]' },
+      { v: '2 yrs', k: 'of company history at most banks' },
       { v: '6–12 mo', k: 'of statements' },
-      { v: '≈ AED 15–30k', k: 'minimum income depending on bank [[tbc:to confirm]]' },
+      { v: '≈ AED 15–30k', k: 'minimum income depending on bank' },
     ],
     banks: {
       accept: 'Trade licence, audited accounts or VAT returns, regular transfers to a personal account.',
@@ -104,7 +104,6 @@ export const situations: Situation[] = [
     ],
     timeline: `Plan for ${data(site.sla.preApprovalResident, 'sla.preApprovalResident')} to pre-approval and 2–3 weeks from valuation to transfer. Nothing is needed for the first call.`,
     cases: ['non-resident-business-owner-approved'],
-    extraCases: ['Business under two years — approved under a low-documentation programme thanks to a stable personal account balance. [[tbc:client consent]]'],
     questions: [
       { q: 'Do I need audited accounts?', a: "Not always. Many banks lend without audited accounts up to a loan size of roughly AED 1–10M, depending on the bank, using VAT returns or 6–12 months of bank statements instead. Without audits, financing is usually capped lower, around 50–70%. Above those thresholds, expect two years of audited financials." },
       { q: 'My company is 8 months old — is it hopeless?', a: "Not hopeless, but early. Most banks want 2–3 years in business, and a few accept 12 months at a lower loan-to-value. Under a year the options are very limited and change often. We plan the file for your 12-month mark, or check whether a salaried co-borrower can carry it now." },
@@ -131,7 +130,6 @@ export const situations: Situation[] = [
     facts: [
       { v: '5', k: 'common reasons for a decline' },
       { v: '1', k: 'honest review before we approach another bank' },
-      { v: '0', k: 'enquiries on your credit file until you say so [[tbc:to confirm]]' },
     ],
     banks: {
       accept: 'A decline for debt burden, income type, employer category or property type — fixable with a different bank or a restructured file.',
@@ -149,7 +147,6 @@ export const situations: Situation[] = [
       ],
     },
     cases: ['non-resident-business-owner-approved'],
-    extraCases: ['Declined for credit history — a repair plan and a second application after 6 months. [[tbc:client consent]]'],
     questions: [
       { q: 'Will a second application hurt my credit score?', a: "Each application shows up as an enquiry on your Al Etihad Credit Bureau report, and several in a short time make the next bank cautious. That's why we find the reason first and apply once, to the bank whose rules fit. Your score also affects the offer: some banks give 80% only above roughly 650–700." },
       { q: 'How long after a decline can I reapply?', a: "There's no fixed waiting period. If the decline was about one bank's policy (income type, employer, property), another bank can look at it straight away. If it was about credit history or debt burden, fix that first, which takes from a few weeks (closing cards) to several months." },
@@ -175,7 +172,7 @@ export const situations: Situation[] = [
     lead: "Most of our non-resident clients come to us at handover. The risk isn't approval — it's timing: valuation, documents and pre-approval all have expiry dates.",
     facts: [
       { v: '50%', k: 'maximum financing until completion' },
-      { v: '60–80%', k: 'after completion depending on your status [[tbc:to confirm]]' },
+      { v: '60–80%', k: 'after completion depending on your status' },
       { v: '6–8 weeks', k: 'is a comfortable runway' },
       { v: '30–60 days', k: 'a pre-approval stays valid' },
     ],
@@ -218,9 +215,8 @@ export const situations: Situation[] = [
     h1: 'Bonus, commission, rent or a new job? Each has a bank that counts it',
     lead: 'Banks like a fixed salary on a UAE payslip. Real income rarely looks like that. The job is to find the bank whose policy matches your income — and to show it the way they read it.',
     facts: [
-      { v: '50%', k: 'of bonus counted at some banks [[tbc:to confirm]]' },
       { v: '6 months', k: 'of statements usually needed' },
-      { v: '1 month', k: 'in a new job can be enough with a probation letter [[tbc:to confirm]]' },
+      { v: '3 months', k: 'in a new job can be enough with a confirmation letter' },
       { v: '70–80%', k: 'of rental income counted' },
     ],
     banks: {
@@ -256,7 +252,7 @@ export const situations: Situation[] = [
       { v: '65 / 70', k: 'age at the end of the loan' },
       { v: '10–15 yrs', k: 'typical term at 55' },
       { v: '1', k: 'co-borrower changes the maths' },
-      { v: 'exceptions', k: 'exist for pension letters and portfolio income [[tbc:to confirm]]' },
+      { v: 'exceptions', k: 'exist for pension letters and portfolio income' },
     ],
     banks: {
       accept: 'Pension or employer letter confirming income beyond 65, rental income, a younger co-borrower.',
@@ -264,7 +260,6 @@ export const situations: Situation[] = [
       decides: 'The debt-burden ratio at the shorter term.',
     },
     cases: ['term-extended-with-co-borrower'],
-    extraCases: ['65+ — exception with an employer letter confirming work to 75, 9-year term. [[tbc:client consent]]'],
     questions: [
       { q: 'Can my adult child be a co-borrower without owning the property?', a: "Often, yes. Many banks accept a son or daughter as co-borrower, which lets the term run on the younger person's age. Whether they also have to be on the title deed depends on the bank: we have closed a case where the property stayed in the parent's name only." },
       { q: 'Is life insurance mandatory and how much?', a: "Life cover on the loan is standard. Most banks arrange it and add it to the monthly payment, roughly 0.01–0.03% of the outstanding balance per month. A few accept an existing policy assigned to the bank. When the term runs past the usual age limit, it is mandatory and can cost more." },
@@ -290,7 +285,7 @@ export const situations: Situation[] = [
     lead: 'The second mortgage has different limits than the first. Equity in a paid-off property can become the down payment for the next one.',
     facts: [
       { v: '60% / 65%', k: 'financing on a second home (expat / national)' },
-      { v: 'up to 60%', k: 'equity release on a paid-off property [[tbc:to confirm]]' },
+      { v: 'up to 60%', k: 'equity release on a paid-off property' },
       { v: '1% or AED 10,000', k: 'early-settlement cap, whichever is lower' },
       { v: '50%', k: 'debt burden across all loans' },
     ],
@@ -305,10 +300,6 @@ export const situations: Situation[] = [
       status: 'resident',
     },
     cases: [],
-    extraCases: [
-      'Three paid-off rented units, no salary — financed on rental income alone. [[tbc:client consent]]',
-      'Buy-out plus equity release for the deposit on a second property. [[tbc:client consent]]',
-    ],
     questions: [
       { q: 'Can I move my mortgage to a bank with a lower rate?', a: "Yes, it's called a buy-out. Most banks want 3–6 months of repayments first and usually charge no processing fee. Your current bank charges early settlement of 1% of the balance or AED 10,000, whichever is lower, and some waive it after a few years." },
       { q: 'How does equity release work in Dubai?', a: "A bank lends against a property you own, usually up to 50–70% of its value minus any outstanding loan. Larger amounts are normally paid to a seller or contractor rather than to your account, so it works best as the down payment for the next purchase. Non-residents can rarely release equity." },

@@ -17,7 +17,7 @@ export const metadata = pageMetadata({
 
 const ways = [
   { t: 'Agents', items: ['Pre-approval before the viewing', 'One WhatsApp message to refer', 'Status without chasing', 'Your client stays yours'] },
-  { t: 'Brokers', items: ['Overflow and complex files', 'No exclusivity', 'Co-branded summaries [[tbc:to confirm]]'] },
+  { t: 'Brokers', items: ['Overflow and complex files', 'No exclusivity'] },
   { t: 'Developers', items: ['On-site advisory at show suites', 'Off-plan and handover financing', 'Payment-plan structuring'] },
 ];
 const heroInk = { color: 'var(--hero-ink)' };
@@ -66,22 +66,13 @@ export default function Page() {
         <div className="wrap">
           <div className="aur" style={{ borderRadius: 'var(--radius)', padding: 28 }}>
             <p className="eyebrow">How we work</p>
-            <div className="grid-2" style={{ marginTop: 14 }}>
+            <div style={{ marginTop: 14 }}>
               <ul className="prose" style={{ listStyle: 'none', padding: 0, color: 'var(--hero-muted)' }}>
                 <li><b style={heroInk}>Structured before submission.</b> The file goes in once, the way the bank reads it.</li>
                 <li><b style={heroInk}>The right bank, not the nearest one.</b></li>
                 <li><b style={heroInk}>One advisor on the whole case,</b> never passed between desks.</li>
-                <li><b style={heroInk}>Honest timelines:</b> salaried with full documents {site.sla.bankMatching ?? <Tbc label="24–48 h" />}; complex cases {site.sla.complexCases ?? <Tbc label="3–5 working days" />}.</li>
+                <li><b style={heroInk}>Honest timelines:</b> salaried with full documents {site.sla.bankMatching ?? <Tbc label="24–48 h" />}{site.sla.complexCases && <>; complex cases {site.sla.complexCases}</>}.</li>
               </ul>
-              <div>
-                <h3 style={heroInk}>Partner Priority Lane <Tbc label="to confirm" /></h3>
-                <ul className="prose" style={{ marginTop: 10, color: 'var(--hero-muted)' }}>
-                  <li>First reply within {site.sla.firstReplyMinutes ?? <Tbc label="15–30" />} min in working hours</li>
-                  <li>Eligibility and plan of action within 48 hours (not a final approval)</li>
-                  <li>Weekly status even when nothing changed</li>
-                  <li>Complex cases escalated to a senior advisor the same day</li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>

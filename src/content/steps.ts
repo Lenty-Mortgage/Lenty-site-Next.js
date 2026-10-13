@@ -45,7 +45,7 @@ export const steps: Step[] = [
     title: 'Valuation to keys',
     when: '2–3 weeks',
     text: 'Valuation, final offer, transfer at the trustee office. We coordinate bank, agent and trustee.',
-    fromYou: 'signatures, in Dubai or by power of attorney [[tbc:to confirm]]',
+    fromYou: 'signatures',
     weDo: 'We order the valuation, get the final offer letter, book the trustee appointment and coordinate the bank, the agent and the seller so nothing expires on the way.',
     delays: 'The valuation gap, a developer NOC that arrives late, and bank holidays. We plan backwards from the transfer date.',
   },

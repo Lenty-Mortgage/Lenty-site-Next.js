@@ -24,8 +24,8 @@ export default function Page() {
       <section className="block">
         <div className="wrap stack-lg">
           <div className="grid-2">
-            <div className="panel stack"><p className="eyebrow">Licence</p><p><b>{c.legalName}</b></p><p>{c.license}, issued {c.licenseIssued} {c.licenseRenewal ? `· renewal ${c.licenseRenewal}` : <Tbc label="renewal" />}</p><p>{c.address ?? <Tbc label="address" />}</p><p className="small muted">TRN {c.trn}</p></div>
-            <div className="panel stack"><p className="eyebrow">Founder</p><div className="avatar" aria-hidden="true">N</div><p><b>Nazar</b> — Founder &amp; General Manager</p><p className="muted"><Tbc label="3-sentence bio + photo" /></p></div>
+            <div className="panel stack"><p className="eyebrow">Licence</p><p><b>{c.legalName}</b></p><p>{c.license}, issued {c.licenseIssued} {c.licenseRenewal && `· valid until ${c.licenseRenewal}`}</p><p>{c.address ?? <Tbc label="address" />}</p><p className="small muted">TRN {c.trn}</p></div>
+            <div className="panel stack"><p className="eyebrow">Founder</p><div className="avatar" aria-hidden="true">N</div><p><b>Nazar</b> — Founder &amp; General Manager</p></div>
           </div>
           <div>
             <div className="sec-head"><h2>Four principles</h2></div>
@@ -37,8 +37,8 @@ export default function Page() {
             </div>
           </div>
           <div className="grid-2">
-            <div className="prose"><h2>Team</h2><p className="muted"><Tbc label="team photo" /></p><p><a className="arrow" href={url('/advisors/')}>Meet the advisors →</a></p></div>
-            <div className="prose"><h2>Timeline</h2><ol className="timeline"><li><span className="t">2025</span><span>Licence issued</span></li><li><span className="t"><Tbc label="date" /></span><span><Tbc label="first deals, partners, the Partners App" /></span></li></ol></div>
+            <div className="prose"><h2>Team</h2><p><a className="arrow" href={url('/advisors/')}>Meet the advisors →</a></p></div>
+            <div className="prose"><h2>Timeline</h2><ol className="timeline"><li><span className="t">2025</span><span>Licence issued</span></li></ol></div>
           </div>
           <div className="hero-ctas"><a className="btn btn-primary" href={url('/check/')}>Check my chances</a><WhatsAppLink page={page} slug={slug} className="btn btn-wa" label="Message an advisor" /></div>
         </div>
