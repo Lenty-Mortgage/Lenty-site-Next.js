@@ -2,9 +2,9 @@
    Fonts: Prata + Inter are self-hosted via @fontsource (copied by scripts/build-client.mjs, declared in app/layout.tsx), not loaded from Google Fonts. */
 :root{
   --forest:#002C1F; --forest-2:#1E4034; --cream:#EEE2C9; --sand:#B79D84; --sage:#2E6A50;
-  --bg:#F4F2EA; --surface:#FFFDF8; --surface-2:#EFECE3; --ink:#002C1F; --muted:#6A7069; --line:#E3DFD2;
+  --bg:#F4F2EA; --surface:#FFFDF8; --surface-2:#EFECE3; --ink:#002C1F; --muted:#646A63; --line:#E3DFD2;
   --primary:#002C1F; --on-primary:#EEE2C9; --accent:#2E6A50; --accent-soft:#E4EDE6; --wa:#1D7A4A; --tbc-bg:#FBF0D6; --tbc-ink:#9C5A00;
-  --ok:#1D7A4A; --warn:#9C5A00;
+  --ok:#1D7A4A; --warn:#9C5A00; --on-wa:#fff;
   --hero-bg:#002C1F; --hero-ink:#EEE2C9; --hero-muted:rgba(238,226,201,.72);
   --aurora:repeating-linear-gradient(100deg,#1e4034 10%,#3f7a5e 15%,#b79d84 20%,#efe2c8 25%,#2e6a50 30%);
   --display:"Prata","Iowan Old Style","Palatino Linotype",Georgia,serif;
@@ -16,11 +16,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#071A13; --surface:#0E261D; --surface-2:#153226; --ink:#EEE2C9; --muted:#A9B0A6; --line:#22392E;
   --primary:#EEE2C9; --on-primary:#002C1F; --accent:#8CC4A6; --accent-soft:#163A2B; --wa:#3DBA7A; --tbc-bg:#3A2A10; --tbc-ink:#F0C27A;
-  --ok:#6FCB98; --warn:#F0C27A; --hero-bg:#0E3326; color-scheme:dark}}
+  --ok:#6FCB98; --warn:#F0C27A; --hero-bg:#0E3326; --on-wa:#071A13; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#071A13; --surface:#0E261D; --surface-2:#153226; --ink:#EEE2C9; --muted:#A9B0A6; --line:#22392E;
   --primary:#EEE2C9; --on-primary:#002C1F; --accent:#8CC4A6; --accent-soft:#163A2B; --wa:#3DBA7A; --tbc-bg:#3A2A10; --tbc-ink:#F0C27A;
-  --ok:#6FCB98; --warn:#F0C27A; --hero-bg:#0E3326; color-scheme:dark}
+  --ok:#6FCB98; --warn:#F0C27A; --hero-bg:#0E3326; --on-wa:#071A13; color-scheme:dark}
 
 /* aurora: the app's signature gradient, used only on dark panels */
 .aur{position:relative;overflow:hidden;isolation:isolate;background:var(--hero-bg);color:var(--hero-ink)}
@@ -41,7 +41,7 @@ img,svg{max-width:100%;height:auto}
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.15;overflow-wrap:anywhere}
 h1{font-size:clamp(2.1rem,5.2vw,3.6rem)}
 h2{font-size:clamp(1.6rem,3.4vw,2.4rem)}
-h3{font-size:1.25rem;font-family:var(--body);font-weight:600;line-height:1.3;letter-spacing:-.01em} /* small headings: Inter (Prata only for large ones) */
+h3,.h3{font-size:1.25rem;font-family:var(--body);font-weight:600;line-height:1.3;letter-spacing:-.01em} /* small headings: Inter (Prata only for large ones); .h3 = h3 look on a higher-level heading */
 h4{margin:0}
 p{margin:0;overflow-wrap:anywhere}
 .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gutter);width:100%}
@@ -106,7 +106,7 @@ header.site.on-hero .menu-btn{color:#EEE2C9;border-color:rgba(238,226,201,.4)}
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:var(--primary);color:var(--on-primary)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn-wa{background:var(--wa);color:#fff}
+.btn-wa{background:var(--wa);color:var(--on-wa)} /* dark theme: dark text on the bright green (white was 2.5:1) */
 .btn-sm{padding:10px 14px;font-size:.9rem}
 .btn-block{width:100%}
 .wa-ico{width:18px;height:18px;flex:none}
@@ -177,7 +177,7 @@ section.block{padding-block:56px;border-bottom:1px solid var(--line)}
 /* hero card (example 2,000,000) */
 .hero-card{border-radius:var(--radius);padding:22px;display:grid;gap:12px;min-width:0;box-shadow:0 18px 40px rgba(0,44,31,.28);background:rgba(7,26,19,.55);border:1px solid rgba(238,226,201,.18);color:#EEE2C9;backdrop-filter:blur(6px)}
 .hero-card .eyebrow{color:var(--sand)}
-.hero-card h3{font-size:1.12rem}
+.hero-card .h3{font-size:1.12rem}
 .hero-card .small{color:rgba(238,226,201,.72)}
 .hero-card .btn-ghost{color:#EEE2C9;border-color:rgba(238,226,201,.4);justify-self:start}
 .mini-row{display:flex;justify-content:space-between;gap:12px;padding-block:6px;border-bottom:1px dashed rgba(238,226,201,.25);font-size:.93rem}
@@ -257,8 +257,9 @@ table.cmp td:last-child{font-weight:500}
 .chat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:grid;gap:10px}
 .bubble{max-width:88%;padding:10px 14px;border-radius:14px;font-size:.93rem}
 .bubble.them{background:var(--surface-2);border-top-left-radius:4px}
-.bubble.me{background:var(--wa);color:#fff;margin-left:auto;border-top-right-radius:4px}
+.bubble.me{background:var(--wa);color:var(--on-wa);margin-left:auto;border-top-right-radius:4px}
 .bubble .t{display:block;font-size:.72rem;opacity:.7;margin-top:4px}
+.bubble.me .t{opacity:1}
 ol.timeline{list-style:none;margin:0;padding:0;display:grid;gap:16px}
 ol.timeline li{display:grid;grid-template-columns:96px 1fr;gap:14px}
 @media (max-width:420px){ol.timeline li{grid-template-columns:1fr;gap:4px}}
@@ -327,7 +328,7 @@ footer.site{padding-block:48px calc(40px + var(--mbar-h));font-size:.9rem;color:
 .foot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
 @media (max-width:900px){.foot{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.foot{grid-template-columns:1fr}}
-.foot h4{font-family:var(--body);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:0 0 10px}
+.foot h2{font-family:var(--body);font-size:.8rem;font-weight:700;line-height:1.55;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:0 0 10px}
 .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .foot a{text-decoration:none}
 .foot a:hover{text-decoration:underline}
@@ -442,6 +443,7 @@ table.lines tr.sub td{font-weight:700;border-bottom:0;padding-top:12px}
 .progress{height:6px;background:var(--surface-2);border-radius:999px;overflow:hidden;margin-bottom:24px}
 .progress i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s ease}
 .qstep h1,.qstep h2{font-size:clamp(1.5rem,3.4vw,2rem);margin-bottom:8px}
+.qstep h2.h3{font-size:1.25rem;margin-bottom:0} /* advisor name on /thanks/: h2 for the outline, h3 look */
 .qstep .why{color:var(--muted);font-size:.92rem;margin-bottom:22px}
 .opts{display:grid;gap:10px}
 .opt{display:flex;align-items:center;gap:14px;text-align:left;width:100%;font:500 1rem var(--body);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;cursor:pointer}

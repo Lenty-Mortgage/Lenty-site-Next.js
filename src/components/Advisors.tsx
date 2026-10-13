@@ -14,6 +14,7 @@ export default function Advisors({ page, slug, all = false, list, heading = true
   return (
     <section className="block" id="advisors" aria-labelledby="adv-h2">
       <div className="wrap">
+        {!heading && <h2 id="adv-h2" className="sr-only">Advisors</h2>}
         {heading && (
           <div className="sec-head">
             <p className="eyebrow">Your advisors</p>
