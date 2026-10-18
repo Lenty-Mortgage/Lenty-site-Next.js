@@ -30,40 +30,42 @@ const prePaint = `(function () {
       try { var t = localStorage.getItem('lenty-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
     })();`;
 
-/* dataLayer + consent-gated GA4 / Clarity. Values are baked in at build time and scoped in an IIFE, like Astro's define:vars. */
-const analytics = `(function(){const ga = ${JSON.stringify(site.analytics.ga4Id)};
-const clarity = ${JSON.stringify(site.analytics.clarityId)};
+/* Google Consent Mode v2 default + page context + GTM. GTM is the only tag in the code: GA4, Google Ads, Meta Pixel and
+   Clarity live in the container and respect consent there. This must run before gtm.js (inline, first in <head>).
+   The visitor's choice is stored by client/site.js in localStorage 'lenty-cookies' ('all' | 'essential'). */
+const analytics = `(function(){const gtm = ${JSON.stringify(site.analytics.gtmId)};
+const base = ${JSON.stringify(url('/'))};
 const leadEndpoint = ${JSON.stringify(LEAD_ENDPOINT)};
     window.dataLayer = window.dataLayer || [];
     window.LENTY = { leadEndpoint: leadEndpoint || null };
-    /* Analytics load only after "Accept" in the cookie bar (see /cookies/). site.js calls LENTY.analytics() on accept. */
-    window.LENTY.analytics = function () {
-      if (window.LENTY.analyticsOn) return;
-      window.LENTY.analyticsOn = true;
-      var load = function (src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); };
-      if (ga) {
-        window.gtag = function () { dataLayer.push(arguments); };
-        gtag('js', new Date());
-        gtag('config', ga, { anonymize_ip: true });
-        load('https://www.googletagmanager.com/gtag/js?id=' + ga);
-        /* gtag.js ignores plain { event: … } objects, so forward ours to GA4 as events. */
-        var push = dataLayer.push;
-        dataLayer.push = function () {
-          for (var i = 0; i < arguments.length; i++) {
-            var o = arguments[i];
-            if (o && typeof o.event === 'string' && !('length' in o)) {
-              var p = {}; for (var k in o) if (k !== 'event') p[k] = o[k];
-              gtag('event', o.event, p);
-            }
-          }
-          return push.apply(dataLayer, arguments);
-        };
-      }
-      if (clarity) {
-        (function (c, l, a, r, i) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; load('https://www.clarity.ms/tag/' + i); })(window, document, 'clarity', 'script', clarity);
-      }
-    };
-    try { if (localStorage.getItem('lenty-cookies') === 'all') window.LENTY.analytics(); } catch (e) {}
+    window.gtag = window.gtag || function () { dataLayer.push(arguments); };
+    var choice = null;
+    try { choice = localStorage.getItem('lenty-cookies'); } catch (e) {}
+    var ok = choice === 'all', s = ok ? 'granted' : 'denied';
+    gtag('consent', 'default', {
+      security_storage: 'granted', functionality_storage: s, personalization_storage: s,
+      analytics_storage: s, ad_storage: s, ad_user_data: s, ad_personalization: s, wait_for_update: 500
+    });
+    gtag('set', 'ads_data_redaction', !ok);
+    /* page_type / situation for every GA4 event and for audiences */
+    var path = location.pathname.indexOf(base) === 0 ? location.pathname.slice(base.length) : location.pathname.slice(1);
+    var seg = path.split('/').filter(Boolean);
+    var types = { situations: 'situation', calculators: 'calculator', cases: 'case', check: 'check', lp: 'check', thanks: 'thanks', partners: 'partners', contact: 'contact' };
+    var pageType = seg.length ? (types[seg[0]] || 'content') : 'home';
+    if (seg[0] === 'cases' && seg.length === 1) pageType = 'cases';
+    var situation = seg[0] === 'situations' && seg[1] ? seg[1] : (new URLSearchParams(location.search).get('s') || '');
+    dataLayer.push({
+      event: 'consent_default',
+      consent_state: { necessary: true, preferences: ok, analytics: ok, marketing: ok },
+      consent_saved: !!choice,
+      page_type: pageType,
+      situation: situation
+    });
+    if (gtm) {
+      dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var j = document.createElement('script'); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtm;
+      document.head.appendChild(j);
+    }
 })();`;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -74,10 +76,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
         <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
         <style dangerouslySetInnerHTML={{ __html: fontCss }} />
-        <script dangerouslySetInnerHTML={{ __html: prePaint }} />
         <script dangerouslySetInnerHTML={{ __html: analytics }} />
+        <script dangerouslySetInnerHTML={{ __html: prePaint }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {site.analytics.gtmId && (
+          <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${site.analytics.gtmId}`} height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>
+        )}
+        {children}
+      </body>
     </html>
   );
 }

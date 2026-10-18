@@ -40,7 +40,7 @@ export default function Page() {
             <div className="prose"><h2>Team</h2><p><a className="arrow" href={url('/advisors/')}>Meet the advisors →</a></p></div>
             <div className="prose"><h2>Timeline</h2><ol className="timeline"><li><span className="t">2025</span><span>Licence issued</span></li></ol></div>
           </div>
-          <div className="hero-ctas"><a className="btn btn-primary" href={url('/check/')}>Check my chances</a><WhatsAppLink page={page} slug={slug} className="btn btn-wa" label="Message an advisor" /></div>
+          <div className="hero-ctas"><a className="btn btn-primary" href={url('/check/')} data-event="cta_check_click" data-cta="hero">Check my chances</a><WhatsAppLink cta="hero" page={page} slug={slug} className="btn btn-wa" label="Message an advisor" /></div>
         </div>
       </section>
     </Base>

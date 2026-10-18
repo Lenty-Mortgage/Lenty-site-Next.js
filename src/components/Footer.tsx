@@ -21,7 +21,7 @@ export default function Footer({ minimal = false }: { minimal?: boolean }) {
                 <li><a href={url('/calculators/monthly-payment/')}>Monthly payment</a></li>
                 <li><a href={url('/calculators/affordability/')}>How much can I borrow</a></li>
                 <li><a href={url('/calculators/cash-to-close/')}>Cash to close</a></li>
-                <li><a href={url('/check/')}>Check my chances</a></li>
+                <li><a href={url('/check/')} data-event="cta_check_click" data-cta="footer">Check my chances</a></li>
               </ul>
             </div>
             <div>
@@ -42,6 +42,7 @@ export default function Footer({ minimal = false }: { minimal?: boolean }) {
               <ul>
                 <li><a href={url('/privacy/')}>Privacy</a></li>
                 <li><a href={url('/terms/')}>Terms</a></li>
+                <li><button type="button" className="linkbtn" data-cookie-settings>Cookie settings</button></li>
                 <li><a href={url('/cookies/')}>Cookies</a></li>
                 <li><a href={url('/disclaimer/')}>Disclaimer</a></li>
               </ul>
@@ -55,12 +56,12 @@ export default function Footer({ minimal = false }: { minimal?: boolean }) {
             <span>{c.license}</span>
             <span>TRN {c.trn}</span>
             <span>{c.address ?? <Tbc label="address" />}</span>
-            <span>{c.email ? <a href={`mailto:${c.email}`}>{c.email}</a> : <Tbc label="email" />}</span>
-            <span>{c.phone ? <a href={`tel:${c.phoneTel}`} data-event="call_click">{c.phone}</a> : <Tbc label="phone" />}</span>
+            <span>{c.email ? <a href={`mailto:${c.email}`} data-event="email_click" data-cta="footer">{c.email}</a> : <Tbc label="email" />}</span>
+            <span>{c.phone ? <a href={`tel:${c.phoneTel}`} data-event="call_click" data-cta="footer">{c.phone}</a> : <Tbc label="phone" />}</span>
           </p>
           <p>Lenty is a licensed mortgage advisory, not a bank. Approval, rates and terms are decided by the lending bank. Figures on this site are estimates.</p>
           <div className="foot-theme"><span>Theme</span><ThemeToggle /></div>
-          <p className="sep"><span>Languages: {languagesLabel()}</span>{!minimal && <><a href={c.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={c.instagram} target="_blank" rel="noopener">Instagram</a><a href={c.facebook} target="_blank" rel="noopener">Facebook</a></>}</p>
+          <p className="sep"><span>Languages: {languagesLabel()}</span>{!minimal && <><a href={c.linkedin} target="_blank" rel="noopener" data-event="social_click" data-cta="linkedin">LinkedIn</a><a href={c.instagram} target="_blank" rel="noopener" data-event="social_click" data-cta="instagram">Instagram</a><a href={c.facebook} target="_blank" rel="noopener" data-event="social_click" data-cta="facebook">Facebook</a></>}</p>
         </div>
       </div>
     </footer>

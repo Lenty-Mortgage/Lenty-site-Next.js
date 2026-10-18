@@ -21,13 +21,13 @@ export default function Page() {
       <section className="block">
         <div className="wrap stack-lg">
           <div className="contact-grid">
-            <div className="panel stack"><p className="eyebrow">WhatsApp</p><p className="num">{c.whatsapp}</p><WhatsAppLink page={page} slug={slug} className="btn btn-wa btn-sm" label="Message" /></div>
-            <div className="panel stack"><p className="eyebrow">Call</p><p>{c.phone ? <a href={`tel:${c.phoneTel}`} data-event="call_click" data-page={slug}>{c.phone}</a> : <Tbc label="phone — one number" />}</p></div>
-            <div className="panel stack"><p className="eyebrow">Email</p><p>{c.email ? <a href={`mailto:${c.email}`}>{c.email}</a> : <Tbc label="email — one domain" />}</p></div>
+            <div className="panel stack"><p className="eyebrow">WhatsApp</p><p className="num">{c.whatsapp}</p><WhatsAppLink cta="contact" page={page} slug={slug} className="btn btn-wa btn-sm" label="Message" /></div>
+            <div className="panel stack"><p className="eyebrow">Call</p><p>{c.phone ? <a href={`tel:${c.phoneTel}`} data-event="call_click" data-cta="contact" data-page={slug}>{c.phone}</a> : <Tbc label="phone — one number" />}</p></div>
+            <div className="panel stack"><p className="eyebrow">Email</p><p>{c.email ? <a href={`mailto:${c.email}`} data-event="email_click" data-cta="contact">{c.email}</a> : <Tbc label="email — one domain" />}</p></div>
             <div className="panel stack"><p className="eyebrow">Hours</p><p>{c.hours ?? <Tbc label="e.g. Mon–Sat 9:00–19:00" />} (Dubai time, GMT+4)</p></div>
           </div>
           <div className="prose"><h2>Address</h2><p>{c.address ?? <Tbc label="address: Business Bay (Al Manara Tower, Office 510) or Barsha Heights (Tameem House, Office 2803)" />}</p>{site.google.url && <p><a className="arrow" href={site.google.url} target="_blank" rel="noopener">Open in Google Maps →</a></p>}</div>
-          <p>Prefer to start with the questions? <a className="arrow" href={url('/check/')}>Check my chances · 2 min →</a></p>
+          <p>Prefer to start with the questions? <a className="arrow" href={url('/check/')} data-event="cta_check_click" data-cta="contact">Check my chances · 2 min →</a></p>
         </div>
       </section>
     </Base>

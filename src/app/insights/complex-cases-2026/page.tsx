@@ -99,8 +99,8 @@ export default function Page() {
           </div>
 
           <div className="hero-ctas">
-            <a className="btn btn-primary" href={url('/check/')}>Check my chances · 2 min</a>
-            <WhatsAppLink page={page} slug={slug} className="btn btn-wa" label="Message an advisor" />
+            <a className="btn btn-primary" href={url('/check/')} data-event="cta_check_click" data-cta="article">Check my chances · 2 min</a>
+            <WhatsAppLink cta="article" page={page} slug={slug} className="btn btn-wa" label="Message an advisor" />
           </div>
         </div>
       </section>

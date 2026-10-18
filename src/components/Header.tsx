@@ -33,7 +33,7 @@ export default function Header({ onHero = false, page, slug, situation }: Props)
         <div className="hdr-cta">
           <a className="btn btn-ghost btn-sm" href={wa} target="_blank" rel="noopener" data-event="whatsapp_click" data-page={slug}>
             <WaIcon />WhatsApp</a>
-          <a className="btn btn-primary btn-sm" href={url(situation ? `/check/?s=${situation}` : '/check/')}>Check my chances</a>
+          <a className="btn btn-primary btn-sm" href={url(situation ? `/check/?s=${situation}` : '/check/')} data-event="cta_check_click" data-cta="header">Check my chances</a>
           <details className="mobile-nav">
             <summary><span className="btn btn-ghost btn-sm menu-btn" aria-label="Menu">Menu</span></summary>
             <nav className="mn-panel" aria-label="Mobile">

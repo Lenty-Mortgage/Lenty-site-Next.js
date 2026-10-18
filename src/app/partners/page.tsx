@@ -41,7 +41,7 @@ export default function Page() {
             <div className="fact"><span className="v">1 business day</span><span className="k">first answer on every referral</span></div>
           </div>
           <div className="hero-ctas">
-            <WhatsAppLink page={page} slug={slug} className="btn btn-wa" label="Send a case on WhatsApp" />
+            <WhatsAppLink cta="partners" page={page} slug={slug} className="btn btn-wa" label="Send a case on WhatsApp" />
             <a className="btn btn-primary" href={app ?? '#partner-form'} data-event={app ? 'partner_app_click' : undefined} data-cta="register">Become a partner</a>
           </div>
           <p className="small muted" style={{ marginTop: 12 }}>{app ? <><a href={app} data-event="partner_app_click" data-cta="login">I already have an account →</a> · <a href="#partner-form">Prefer we set it up for you?</a></> : <>I already have an account → <Tbc label="app link to come" /></>}</p>

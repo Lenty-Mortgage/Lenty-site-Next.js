@@ -58,8 +58,9 @@ export const site = {
     next: ['Arabic', 'Russian'] as string[],
   },
   analytics: {
-    ga4Id: null as string | null, // e.g. 'G-XXXXXXX' — null = no tag inserted
-    clarityId: null as string | null, // Microsoft Clarity project id — null = no tag inserted
+    // The only tag in the code. GA4 (G-7B7J28M27F), Google Ads (AW-17884519518), Meta Pixel and Clarity
+    // are configured inside this container and fire only after consent. null = no tag inserted.
+    gtmId: 'GTM-TQGMKG53' as string | null,
     // Google Search Console, URL-prefix property: the content of <meta name="google-site-verification">. Not needed with a DNS (Domain) property.
     gscVerification: null as string | null,
     bingVerification: null as string | null, // Bing Webmaster Tools <meta name="msvalidate.01">; not needed when importing from Search Console

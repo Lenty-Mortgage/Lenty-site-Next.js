@@ -31,7 +31,7 @@ export default function Page() {
         </div>
       </section>
       <FAQ groups={faq} title="" link={false} id="faq-all" groupTag="h2" />
-      <section className="block"><div className="wrap"><p>Still have a question? <WhatsAppLink page={page} slug={slug} className="arrow" icon={false} label="WhatsApp an advisor →" /></p></div></section>
+      <section className="block"><div className="wrap"><p>Still have a question? <WhatsAppLink cta="faq" page={page} slug={slug} className="arrow" icon={false} label="WhatsApp an advisor →" /></p></div></section>
     </Base>
   );
 }

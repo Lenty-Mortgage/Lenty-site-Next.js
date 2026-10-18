@@ -87,6 +87,11 @@ import { cashToClose, monthlyPayment, affordability, ltvFor, fmt, parse } from '
 
   const render = tab === 'cash-to-close' ? renderCash : tab === 'monthly-payment' ? renderMonthly : renderAfford;
   form.addEventListener('submit', (e) => e.preventDefault());
+  /* calc_start: once per page, on the visitor's first change (calc_result also fires on load) */
+  let started = false;
+  const start = () => { if (started) return; started = true; (window.dataLayer = window.dataLayer || []).push({ event: 'calc_start', calculator: tab }); };
+  form.addEventListener('input', start);
+  form.addEventListener('change', start);
   form.addEventListener('input', (e) => {
     if (tab === 'monthly-payment') {
       if (e.target.id === 'downPct') syncDown('pct'); else if (e.target.id === 'downAed') syncDown('aed'); else if (e.target.id === 'price') syncDown('pct');

@@ -50,7 +50,7 @@ export default async function Page({ params }: Params) {
             <article className="adv" style={{ maxWidth: 360 }}>
               <div className="avatar" aria-hidden="true">{adv.initial}</div>
               <h3>{adv.name ?? <Tbc label={adv.tbcLabel ?? 'advisor'} />}</h3><p className="small muted">{adv.role}</p>
-              <div className="acts"><WhatsAppLink page={page} slug={slug} situation={c.situationSlug} className="btn btn-ghost btn-sm" /></div>
+              <div className="acts"><WhatsAppLink cta="case" page={page} slug={slug} situation={c.situationSlug} className="btn btn-ghost btn-sm" /></div>
             </article>
           </div>
           <div className="aur cta-final" style={{ borderRadius: 'var(--radius)' }}>

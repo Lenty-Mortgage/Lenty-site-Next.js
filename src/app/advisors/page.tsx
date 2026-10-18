@@ -31,7 +31,7 @@ export default function Page() {
         <div className="wrap">
           <div className="band aur">
             <div style={{ display: 'grid', gap: 10 }}><h2>Not sure who to ask? Message us — we&apos;ll route you to the right advisor.</h2></div>
-            <div style={{ display: 'grid', gap: 10, justifyItems: 'start' }}><WhatsAppLink page={page} slug={slug} className="btn btn-primary" label="Message us" /></div>
+            <div style={{ display: 'grid', gap: 10, justifyItems: 'start' }}><WhatsAppLink cta="advisors" page={page} slug={slug} className="btn btn-primary" label="Message us" /></div>
           </div>
         </div>
       </section>

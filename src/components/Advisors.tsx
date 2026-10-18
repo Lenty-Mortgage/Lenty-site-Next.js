@@ -33,7 +33,7 @@ export default function Advisors({ page, slug, all = false, list, heading = true
                 <p className="small muted">Situations: {a.situations.map((s, j) => <Fragment key={s}><a href={url(`/situations/${s}/`)}>{situations.find((x) => x.slug === s)?.nav}</a>{j < a.situations.length - 1 ? ', ' : ''}</Fragment>)}</p>
               )}
               <div className="acts">
-                <WhatsAppLink page={page} slug={slug} className="btn btn-ghost btn-sm" />
+                <WhatsAppLink cta="advisor_card" page={page} slug={slug} className="btn btn-ghost btn-sm" />
               </div>
             </article>
           ))}

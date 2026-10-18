@@ -73,7 +73,7 @@ export default function Page() {
               </section>
             ))}
           </div>
-          <p style={{ marginTop: 28 }}>A term we missed? <WhatsAppLink page={page} slug={slug} className="arrow" icon={false} label="Ask an advisor →" /></p>
+          <p style={{ marginTop: 28 }}>A term we missed? <WhatsAppLink cta="glossary" page={page} slug={slug} className="arrow" icon={false} label="Ask an advisor →" /></p>
         </div>
       </section>
     </Base>

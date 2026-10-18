@@ -150,10 +150,10 @@ export default function Calculator({ tab, page, slug }: Props) {
             <span>Fees are typical Dubai figures. Your advisor confirms the exact numbers for your bank.</span>
           </div>
           <div className="res-acts">
-            <a className="btn btn-primary" href={url('/check/')} id="calcCheck">{tab === 'cash-to-close' ? 'Discuss my case' : 'Check my chances'}</a>
+            <a className="btn btn-primary" href={url('/check/')} data-event="cta_check_click" data-cta="calculator" id="calcCheck">{tab === 'cash-to-close' ? 'Discuss my case' : 'Check my chances'}</a>
             {tab === 'cash-to-close'
               ? <a className="btn btn-ghost" href={url('/how-it-works/')}>What happens next</a>
-              : <WhatsAppLink page={page} slug={slug} className="btn btn-ghost" label="Send me this estimate" icon={false} />}
+              : <WhatsAppLink cta="calculator" page={page} slug={slug} className="btn btn-ghost" label="Send me this estimate" icon={false} />}
           </div>
         </div>
       </div>
@@ -161,7 +161,7 @@ export default function Calculator({ tab, page, slug }: Props) {
       <div className="calc-sticky">
         <span className="sl" id="stickyLabel">{tab === 'cash-to-close' ? 'Cash on day one' : tab === 'monthly-payment' ? 'Monthly payment' : 'You could borrow'}</span>
         <b className="num" id="stickyTotal">{tab === 'cash-to-close' && d ? `AED ${fmt(d.total)}` : '–'}</b>
-        <a className="btn btn-primary btn-sm" href={url('/check/')}>Check my chances</a>
+        <a className="btn btn-primary btn-sm" href={url('/check/')} data-event="cta_check_click" data-cta="calculator_sticky">Check my chances</a>
       </div>
       <template id="tplNrFee" dangerouslySetInnerHTML={{ __html: tplNrFee }} />
       <ModuleScript name="calculator" />

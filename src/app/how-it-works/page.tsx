@@ -49,7 +49,7 @@ export default function Page() {
         </div>
       </section>
       <section className="block">
-        <div className="wrap"><div className="hero-ctas"><a className="btn btn-primary" href={url('/check/')}>Check my chances · 2 min</a></div></div>
+        <div className="wrap"><div className="hero-ctas"><a className="btn btn-primary" href={url('/check/')} data-event="cta_check_click" data-cta="how_it_works">Check my chances · 2 min</a></div></div>
       </section>
       <InlineModule name="doc-tabs" />
     </Base>

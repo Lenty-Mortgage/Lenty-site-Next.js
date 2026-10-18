@@ -115,7 +115,7 @@ export default async function Page({ params }: Params) {
             <h2>Questions</h2>
             {items.map((it) => <details key={it.q} className="qa"><summary>{it.q}</summary><Html as="p" className="ans" html={rich(it.a)} /></details>)}
           </div>
-          <p className="sec-foot">Still have a question? <WhatsAppLink page={page} slug={slug} situation={s.slug} className="arrow" icon={false} label="WhatsApp an advisor →" /></p>
+          <p className="sec-foot">Still have a question? <WhatsAppLink cta="situation_faq" page={page} slug={slug} situation={s.slug} className="arrow" icon={false} label="WhatsApp an advisor →" /></p>
         </div>
       </section>
 
@@ -133,7 +133,7 @@ export default async function Page({ params }: Params) {
             <p className="muted" style={{ color: 'var(--hero-muted)' }}>Your advisor for this situation: <b>{adv.name ?? <Tbc label={adv.tbcLabel ?? 'advisor'} />}</b> · {adv.role}</p>
             <div className="hc-ctas">
               <a className="btn btn-primary" href={url(`/check/?s=${s.slug}`)}>Check my chances · 2 min</a>
-              <WhatsAppLink page={page} slug={slug} situation={s.slug} className="btn btn-wa" label="Message an advisor" />
+              <WhatsAppLink cta="situation_cta" page={page} slug={slug} situation={s.slug} className="btn btn-wa" label="Message an advisor" />
             </div>
           </div>
         </div>
